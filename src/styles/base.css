@@ -1,0 +1,7 @@
+* {
+  @apply select-none;
+}
+
+body {
+  @apply text-base pt-14 lg:pl-60 bg-gray-50 dark:bg-slate-800/95;
+}

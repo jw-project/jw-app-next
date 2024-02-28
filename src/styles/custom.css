@@ -1,0 +1,31 @@
+.icon-x-small.material-symbols-rounded {
+  @apply text-lg leading-5;
+}
+
+.icon-small.material-symbols-rounded {
+  @apply text-xl leading-4;
+}
+
+.icon-medium.material-symbols-rounded {
+  @apply text-2xl leading-5;
+}
+
+.icon-large.material-symbols-rounded {
+  @apply text-3xl leading-6;
+}
+
+.icon-x-large.material-symbols-rounded {
+  @apply text-4xl leading-7;
+}
+
+.icon-xx-large.material-symbols-rounded {
+  @apply text-5xl leading-10;
+}
+
+.icon-xxx-large.material-symbols-rounded {
+  @apply text-6xl leading-[3.5rem];
+}
+
+.icon-xxxx-large.material-symbols-rounded {
+  @apply text-7xl leading-[4rem];
+}
