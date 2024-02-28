@@ -6,7 +6,9 @@ import { Body } from "~/components/body/body";
 import type { PropsWithChildren } from "react";
 import { LanguageProvider } from "~/global-context/translation";
 import { getTranslateResources } from "~/utils/i18n.server";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
+import { cacheConfigs } from "~/utils/cache.server";
+import type { Translations } from "~/hooks/use-translation";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -16,12 +18,15 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-  // let resources = cacheConfigs.get<Translations>('resources');
-  // if (!resources) {
-  const resources = await getTranslateResources();
-  const language = headers().get("accept-language")?.split(",")[0] || "en";
-  // cacheConfigs.set('resources', resources);
-  // }
+  let resources = cacheConfigs.get<Translations>("resources");
+  if (!resources) {
+    resources = await getTranslateResources();
+    cacheConfigs.set("resources", resources);
+  }
+  const language =
+    cookies().get("language")?.value ||
+    headers().get("accept-language")?.split(",")[0] ||
+    "en";
 
   return (
     <LanguageProvider translations={resources} defaultLanguage={language}>

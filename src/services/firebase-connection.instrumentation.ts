@@ -1,5 +1,3 @@
-import { error, info } from "console";
-
 import { cert, getApps, initializeApp } from "firebase-admin/app";
 
 export function firebaseAdminConnection() {
@@ -16,11 +14,11 @@ export function firebaseAdminConnection() {
         databaseURL: "https://jw-project-dev.firebaseio.com",
         storageBucket: "gs://jw-project-dev.appspot.com",
       });
-      info("Firebase admin connected", getApps());
+      console.info("Firebase admin connected", getApps());
     }
 
-    info("Firebase admin connected");
+    console.info("Firebase admin connected");
   } catch (e) {
-    error("Firebase admin connect error:", e);
+    console.error("Firebase admin connect error:", e);
   }
 }

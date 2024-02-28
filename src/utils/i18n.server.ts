@@ -1,5 +1,3 @@
-"use server";
-
 import { remoteConfig } from "firebase-admin";
 
 import type { Translations } from "../hooks/use-translation";

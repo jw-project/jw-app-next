@@ -1,26 +1,19 @@
 "use server";
 
-import { error, info } from "console";
-
 import { firestore } from "firebase-admin";
-import { cert, getApps, initializeApp } from "firebase-admin/app";
 import { getAuth } from "firebase-admin/auth";
 import { cookies } from "next/headers";
 import { PermissionsEnum } from "~/entities/permissions";
 import type { PublisherEntity } from "~/entities/publisher";
-
-// import { PermissionsEnum } from '~/entities/permissions';
-// import type { PublisherEntity } from '~/entities/publisher';
-// import { cacheUser } from '~/utils/cache.server';
-
-// import { UnauthorizedError } from './api/throws-errors';
-// import { commitSession, getSession } from './session.server';
+import { cacheUser } from "~/utils/cache.server";
 
 type GetAuthenticatedUserOptions = {
   ignoreCache?: boolean;
 };
 
-export async function getAuthenticatedUser() {
+export async function getAuthenticatedUser(
+  options?: GetAuthenticatedUserOptions,
+) {
   // request: Request,
   // options?: GetAuthenticatedUserOptions,
   // firebaseAdminConnection();
@@ -32,17 +25,19 @@ export async function getAuthenticatedUser() {
     throw new Error("No session");
   }
 
-  // const cache = cacheUser?.get<PublisherEntity>(uidUser);
-  // if (cache && !options?.ignoreCache) {
-  //   info(`Successfully load user data from cache: ${JSON.stringify(cache)}`);
+  const cache = cacheUser.get<PublisherEntity>(uidUser);
+  if (cache && !options?.ignoreCache) {
+    console.info(
+      `Successfully load user data from cache: ${JSON.stringify(cache)}`,
+    );
 
-  //   return cache;
-  // }
+    return cache;
+  }
 
   const userRecord = await getAuth().getUser(uidUser);
 
   if (!userRecord) {
-    info("Error fetching auth user data");
+    console.info("Error fetching auth user data");
     // throw new UnauthorizedError('No session');
     throw new Error("No session");
   }
@@ -71,21 +66,9 @@ export async function getAuthenticatedUser() {
     };
   }
 
-  // cacheUser?.set(uidUser, publisher);
+  cacheUser.set(uidUser, publisher);
 
-  info(`Successfully fetched user data: ${JSON.stringify(userRecord)}`);
+  console.info(`Successfully fetched user data: ${JSON.stringify(userRecord)}`);
 
   return publisher;
 }
-
-// export async function sessionLogin(request: Request) {
-//   const formData = await request.formData();
-//   const idToken = formData.get('token')?.toString() || '';
-
-//   const decodedToken = await getAuth().verifyIdToken(idToken);
-
-//   const session = await getSession(request.headers.get('Cookie'));
-//   session.set('uidUser', decodedToken.uid);
-
-//   return commitSession(session);
-// }
