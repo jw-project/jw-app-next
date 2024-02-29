@@ -3,11 +3,14 @@
 import {
   createContext,
   useContext,
+  useEffect,
   useState,
   type Dispatch,
   type PropsWithChildren,
   type SetStateAction,
 } from 'react';
+
+import { setCookie } from 'cookies-next';
 
 import type { TranslationConfig, Translations } from '~/hooks/use-translation';
 
@@ -30,6 +33,12 @@ export function LanguageProvider({
   const [translations, setTranslations] =
     useState<Translations>(translationsParam);
   const [defaultLanguage, setDefaultLanguage] = useState(defaultLanguageParam);
+
+  useEffect(() => {
+    setCookie('language', defaultLanguage, {
+      expires: new Date(Date.now() + 60 * 60 * 24 * 365),
+    });
+  }, [defaultLanguage]);
 
   return (
     <TranslationContext.Provider
