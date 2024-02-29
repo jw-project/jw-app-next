@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  createContext,
-  useEffect,
-  useState,
-  type PropsWithChildren,
-} from 'react';
-
-import { setCookie } from 'cookies-next';
+import { createContext, useState, type PropsWithChildren } from 'react';
 
 import type { ZIndex } from '~/components/commons/backdrop';
 
@@ -65,12 +58,6 @@ export const ThemeProvider = ({
 
     return newTheme;
   };
-
-  useEffect(() => {
-    setCookie('theme', theme, {
-      expires: new Date(Date.now() + 60 * 60 * 24 * 365),
-    });
-  }, [theme]);
 
   return (
     <ThemeContext.Provider

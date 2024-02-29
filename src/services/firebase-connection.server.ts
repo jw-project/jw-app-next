@@ -7,7 +7,6 @@ import { getAuth } from 'firebase-admin/auth';
 
 import { PermissionsEnum } from '~/entities/permissions';
 import type { PublisherEntity } from '~/entities/publisher';
-import { cacheUser } from '~/utils/cache.server';
 
 type GetAuthenticatedUserOptions = {
   ignoreCache?: boolean;
@@ -68,7 +67,7 @@ export async function getAuthenticatedUser(
     };
   }
 
-  cacheUser.set(uidUser, publisher);
+  global.cacheUser.set(uidUser, publisher);
 
   console.info(`Successfully fetched user data: ${JSON.stringify(userRecord)}`);
 

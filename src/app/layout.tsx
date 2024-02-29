@@ -10,7 +10,6 @@ import { Body } from '~/components/body/body';
 import { ThemeProvider, type Theme } from '~/global-context/theme';
 import { LanguageProvider } from '~/global-context/translation';
 import type { Translations } from '~/hooks/use-translation';
-import { cacheConfigs } from '~/utils/cache.server';
 import { getTranslateResources } from '~/utils/i18n.server';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -21,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-  let resources = cacheConfigs.get<Translations>('resources');
+  let resources = global.cacheConfigs.get<Translations>('resources');
   if (!resources) {
     resources = await getTranslateResources();
     cacheConfigs.set('resources', resources);

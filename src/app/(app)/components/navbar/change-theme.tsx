@@ -1,10 +1,12 @@
 'use client';
 
-import axios from 'axios';
+import { startTransition } from 'react';
 
 import { Icon } from '~/components/commons/icon';
 import { Tooltip } from '~/components/commons/tooltip';
 import { useTheme } from '~/hooks/use-theme';
+
+import { changeTheme } from './change-theme.server';
 
 export function ChangeTheme() {
   const { theme, toggleTheme } = useTheme();
@@ -12,9 +14,10 @@ export function ChangeTheme() {
 
   const changeHandle = async () => {
     const newTheme = toggleTheme();
-    try {
-      await axios.post('/api/save-theme', { theme: newTheme });
-    } catch (error) {}
+
+    startTransition(() => {
+      changeTheme(newTheme);
+    });
   };
 
   return (
