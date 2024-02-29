@@ -25,6 +25,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.1",
+    "react-hot-toast": "^2.4.1",
+    "uuid": "^9.0.1",
     "windstitch": "^0.3.0",
     "zod": "^3.22.4"
   },
@@ -34,6 +36,7 @@
     "@types/node": "^20.11.22",
     "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
     "autoprefixer": "^10.4.17",

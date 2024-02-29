@@ -12,7 +12,7 @@ type ShowBackdropOptions = {
 
 export const ThemeContext = createContext<{
   theme: Theme;
-  toggleTheme: () => Theme;
+  toggleTheme: (theme?: Theme) => Theme;
   backdropZIndex: ZIndex;
   backdropIsShow: boolean;
   showBackdrop: (options?: ShowBackdropOptions) => void;
@@ -43,9 +43,14 @@ export const ThemeProvider = ({
     setBackdrop(false);
   };
 
-  const toggleTheme = () => {
+  const toggleTheme = (theme?: Theme) => {
     let newTheme: Theme = defaultTheme;
     setTheme((current) => {
+      if (theme) {
+        newTheme = theme;
+
+        return theme;
+      }
       newTheme = current === 'light' ? 'dark' : 'light';
 
       return newTheme;

@@ -1,10 +1,11 @@
+'use client';
+
 import { Fragment } from 'react';
 
 import { Transition } from '@headlessui/react';
 
+import { Icon } from '~/components/commons/icon';
 import { useSave } from '~/hooks/use-save';
-
-import { Icon } from '../commons/icon';
 
 export function SavingIndicator() {
   const { isSaving } = useSave();

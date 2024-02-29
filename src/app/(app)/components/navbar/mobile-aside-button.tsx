@@ -1,8 +1,9 @@
+'use client';
+
 import { w } from 'windstitch';
 
+import { Icon } from '~/components/commons/icon';
 import { useMenu } from '~/hooks/use-menu';
-
-import { Icon } from '../commons/icon';
 
 const MobileAsideButtonStyled = w.div(`
     lg:hidden

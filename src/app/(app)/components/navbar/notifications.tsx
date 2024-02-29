@@ -1,8 +1,8 @@
 import { w } from 'windstitch';
 
-import { DropdownMenu } from '../commons/dropdown';
-import { Icon } from '../commons/icon';
-import { NotificationBadge } from '../commons/notification-badge';
+import { DropdownMenu } from '~/components/commons/dropdown';
+import { Icon } from '~/components/commons/icon';
+import { NotificationBadge } from '~/components/commons/notification-badge';
 
 const NotificationsStyled = w.div(`
   flex

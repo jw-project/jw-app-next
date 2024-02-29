@@ -7,6 +7,7 @@ import { cookies, headers } from 'next/headers';
 import '~/styles/global.css';
 
 import { Body } from '~/components/body/body';
+import { ThemeProvider, type Theme } from '~/global-context/theme';
 import { LanguageProvider } from '~/global-context/translation';
 import type { Translations } from '~/hooks/use-translation';
 import { cacheConfigs } from '~/utils/cache.server';
@@ -29,10 +30,13 @@ export default async function RootLayout({ children }: PropsWithChildren) {
     cookies().get('language')?.value ||
     headers().get('accept-language')?.split(',')[0] ||
     'en';
+  const theme = (cookies().get('theme')?.value || 'light') as Theme;
 
   return (
     <LanguageProvider translations={resources} defaultLanguage={language}>
-      <Body>{children}</Body>
+      <ThemeProvider defaultTheme={theme}>
+        <Body>{children}</Body>
+      </ThemeProvider>
     </LanguageProvider>
   );
 }

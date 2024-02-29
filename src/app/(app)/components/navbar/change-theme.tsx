@@ -1,9 +1,10 @@
+'use client';
+
 import axios from 'axios';
 
+import { Icon } from '~/components/commons/icon';
+import { Tooltip } from '~/components/commons/tooltip';
 import { useTheme } from '~/hooks/use-theme';
-
-import { Icon } from '../commons/icon';
-import { Tooltip } from '../commons/tooltip';
 
 export function ChangeTheme() {
   const { theme, toggleTheme } = useTheme();

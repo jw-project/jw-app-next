@@ -1,3 +1,5 @@
+'use client';
+
 import { useUser } from '~/hooks/use-user';
 
 import { Avatar } from './avatar';
