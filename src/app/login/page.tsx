@@ -1,7 +1,7 @@
-"use server";
+'use server';
 
-import { getFirebaseEnvs } from "./login.server";
-import { Login } from "./components";
+import { Login } from './components';
+import { getFirebaseEnvs } from './login.server';
 
 export default async function LoginPage() {
   const firebaseOptions = await getFirebaseEnvs();

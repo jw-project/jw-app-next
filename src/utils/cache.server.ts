@@ -1,7 +1,7 @@
-import NodeCache from "node-cache";
+import NodeCache from 'node-cache';
 
 const config: NodeCache.Options = {
-  stdTTL: process.env.NODE_ENV === "production" ? 0 : 60,
+  stdTTL: process.env.NODE_ENV === 'production' ? 0 : 60,
 };
 
 const cacheConfigs = new NodeCache(config);

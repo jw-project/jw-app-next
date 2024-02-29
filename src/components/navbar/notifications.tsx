@@ -1,8 +1,8 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
-import { DropdownMenu } from "../commons/dropdown";
-import { Icon } from "../commons/icon";
-import { NotificationBadge } from "../commons/notification-badge";
+import { DropdownMenu } from '../commons/dropdown';
+import { Icon } from '../commons/icon';
+import { NotificationBadge } from '../commons/notification-badge';
 
 const NotificationsStyled = w.div(`
   flex
@@ -24,10 +24,10 @@ export function Notifications() {
     <DropdownMenu
       button={Button}
       options={[
-        { label: "opt1", to: "" },
-        { label: "opt2", to: "" },
-        "divider",
-        { label: "opt3", to: "" },
+        { label: 'opt1', to: '' },
+        { label: 'opt2', to: '' },
+        'divider',
+        { label: 'opt3', to: '' },
       ]}
     />
   );

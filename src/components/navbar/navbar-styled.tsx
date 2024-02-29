@@ -1,4 +1,4 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
 export const NavbarBase = w.nav(`
     top-0
@@ -37,10 +37,10 @@ export const NavbarItem = w.div(
   {
     variants: {
       divider: (divider: boolean) =>
-        divider ? "border-r border-gray-100 dark:border-gray-700" : "",
+        divider ? 'border-r border-gray-100 dark:border-gray-700' : '',
     },
     defaultVariants: { divider: false },
-    transient: ["divider"],
+    transient: ['divider'],
   },
 );
 

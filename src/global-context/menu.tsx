@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
 import {
   createContext,
   useEffect,
   useState,
   type PropsWithChildren,
-} from "react";
+} from 'react';
 
-import { useIsMobile } from "~/hooks/use-is-mobile";
-import { useTheme } from "~/hooks/use-theme";
+import { useIsMobile } from '~/hooks/use-is-mobile';
+import { useTheme } from '~/hooks/use-theme';
 
 type MenuContextType = {
   showMenu: boolean;

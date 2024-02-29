@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { createContext, useState, type PropsWithChildren } from "react";
+import { createContext, useState, type PropsWithChildren } from 'react';
 
-import type { ZIndex } from "~/components/commons/backdrop";
+import type { ZIndex } from '~/components/commons/backdrop';
 
-export type Theme = "light" | "dark";
+export type Theme = 'light' | 'dark';
 
 type ShowBackdropOptions = {
   zIndex?: ZIndex;
@@ -18,8 +18,8 @@ export const ThemeContext = createContext<{
   showBackdrop: (options?: ShowBackdropOptions) => void;
   hideBackdrop: () => void;
 }>({
-  theme: "light",
-  toggleTheme: () => "light",
+  theme: 'light',
+  toggleTheme: () => 'light',
   backdropZIndex: 40,
   backdropIsShow: false,
   showBackdrop: () => {},
@@ -46,7 +46,7 @@ export const ThemeProvider = ({
   const toggleTheme = () => {
     let newTheme: Theme = defaultTheme;
     setTheme((current) => {
-      newTheme = current === "light" ? "dark" : "light";
+      newTheme = current === 'light' ? 'dark' : 'light';
 
       return newTheme;
     });

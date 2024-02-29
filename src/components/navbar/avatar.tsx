@@ -1,6 +1,6 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
-import { Dropdown } from "../commons/dropdown";
+import { Dropdown } from '../commons/dropdown';
 
 const AvatarStyled = w.div(`
     inline-flex

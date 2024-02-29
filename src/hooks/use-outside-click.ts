@@ -1,7 +1,7 @@
-import { useEffect, type RefObject } from "react";
+import { useEffect, type RefObject } from 'react';
 
 function assertIsNode(e: EventTarget | null): asserts e is Node {
-  if (!e || !("nodeType" in e)) {
+  if (!e || !('nodeType' in e)) {
     throw new Error(`Node expected`);
   }
 }
@@ -18,10 +18,10 @@ export function useOutsideClick(
         callback();
       }
     }
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [ref, ...deps]);
 }

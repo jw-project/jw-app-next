@@ -1,9 +1,15 @@
-"use client";
+'use client';
 
-import type { Dispatch, SetStateAction } from "react";
-import { useContext, type PropsWithChildren, useState } from "react";
-import { createContext } from "react";
-import type { TranslationConfig, Translations } from "~/hooks/use-translation";
+import {
+  createContext,
+  useContext,
+  useState,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
+} from 'react';
+
+import type { TranslationConfig, Translations } from '~/hooks/use-translation';
 
 type TranslationContextType = {
   defaultLanguage: string;

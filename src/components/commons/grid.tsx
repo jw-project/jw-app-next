@@ -1,4 +1,4 @@
-import { w, type W } from "windstitch";
+import { w, type W } from 'windstitch';
 
 export const Grid = w.div(
   `
@@ -9,10 +9,10 @@ export const Grid = w.div(
   {
     variants: {
       cols: {
-        1: "md:grid-cols-1",
-        2: "md:grid-cols-2",
-        3: "md:grid-cols-3",
-        4: "md:grid-cols-4",
+        1: 'md:grid-cols-1',
+        2: 'md:grid-cols-2',
+        3: 'md:grid-cols-3',
+        4: 'md:grid-cols-4',
       },
     },
     defaultVariants: {
@@ -28,11 +28,11 @@ export const Col = w.div(
   {
     variants: {
       colSpan: {
-        0: "",
-        1: "md:col-span-1",
-        2: "md:col-span-2",
-        3: "md:col-span-3",
-        4: "md:col-span-4",
+        0: '',
+        1: 'md:col-span-1',
+        2: 'md:col-span-2',
+        3: 'md:col-span-3',
+        4: 'md:col-span-4',
       },
     },
     defaultVariants: {

@@ -1,16 +1,16 @@
-import { useUser } from "~/hooks/use-user";
+import { useUser } from '~/hooks/use-user';
 
-import { Avatar } from "./avatar";
-import { ChangeTheme } from "./change-theme";
-import { MobileAsideButton } from "./mobile-aside-button";
+import { Avatar } from './avatar';
+import { ChangeTheme } from './change-theme';
+import { MobileAsideButton } from './mobile-aside-button';
 import {
   NavbarBase,
   NavbarEnd,
   NavbarItem,
   NavbarStart,
-} from "./navbar-styled";
-import { Notifications } from "./notifications";
-import { SavingIndicator } from "./saving-indicator";
+} from './navbar-styled';
+import { Notifications } from './notifications';
+import { SavingIndicator } from './saving-indicator';
 
 export function Navbar() {
   const { congregationId } = useUser();

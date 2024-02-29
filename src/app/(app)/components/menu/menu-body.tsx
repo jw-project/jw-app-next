@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import { Fragment } from "react";
+import { Fragment } from 'react';
+import { usePathname } from 'next/navigation';
 
-import { PermissionsEnum, type Permissions } from "~/entities/permissions";
-import { useMenu } from "~/hooks/use-menu";
-import { useTransition } from "~/hooks/use-transition";
-import { useTranslation } from "~/hooks/use-translation";
+import { Icon } from '~/components/commons/icon';
+import { PermissionsEnum, type Permissions } from '~/entities/permissions';
+import { useMenu } from '~/hooks/use-menu';
+import { useTransition } from '~/hooks/use-transition';
+import { useTranslation } from '~/hooks/use-translation';
 
 import {
   IconMenuStyled,
   LinkLabelMenuStyled,
   LinkMenuStyled,
   MenuLabel,
-} from "./menu-styled";
-import type { MenuListType, MenuType } from "./types";
-import { Icon } from "~/components/commons/icon";
-import { usePathname } from "next/navigation";
+} from './menu-styled';
+import type { MenuListType, MenuType } from './types';
 
 function MenuLink({ list }: { list: MenuListType[] }) {
-  const { translate } = useTranslation("menu");
+  const { translate } = useTranslation('menu');
   const { closeMenu } = useMenu();
   const { toggleTransition } = useTransition();
   const pathname = usePathname();
@@ -59,7 +59,7 @@ export function MenuBody({
   menu: MenuType[];
   permissions: Permissions;
 }) {
-  const { translate } = useTranslation("menu.categories");
+  const { translate } = useTranslation('menu.categories');
 
   const filterMenu = () =>
     menu

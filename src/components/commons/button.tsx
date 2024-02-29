@@ -1,8 +1,8 @@
-import type { ComponentProps, PropsWithChildren } from "react";
+import type { ComponentProps, PropsWithChildren } from 'react';
 
-import { w, type W } from "windstitch";
+import { w, type W } from 'windstitch';
 
-import { Icon, type IconOpts } from "./icon";
+import { Icon, type IconOpts } from './icon';
 
 const ButtonStyled = w.button(
   `
@@ -61,24 +61,24 @@ const ButtonStyled = w.button(
 `,
       },
     },
-    defaultVariants: { buttonstyle: "primary" },
+    defaultVariants: { buttonstyle: 'primary' },
   },
 );
 
 type ButtonStyledType = W.Infer<typeof ButtonStyled>;
 
 export const Button = ({
-  buttonstyle = "primary",
+  buttonstyle = 'primary',
   icon,
   children,
   ...props
 }: PropsWithChildren<
-  ComponentProps<"button"> & ButtonStyledType & { icon?: IconOpts }
+  ComponentProps<'button'> & ButtonStyledType & { icon?: IconOpts }
 >) => {
   const iconColors = {
-    primary: "text-white dark:text-black",
-    secondary: "text-gray-700 dark:text-gray-300",
-    danger: "text-white dark:text-black",
+    primary: 'text-white dark:text-black',
+    secondary: 'text-gray-700 dark:text-gray-300',
+    danger: 'text-white dark:text-black',
   };
 
   return (

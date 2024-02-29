@@ -1,4 +1,4 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
 export const Overlay = w.div(`
     fixed

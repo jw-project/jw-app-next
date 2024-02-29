@@ -1,16 +1,15 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
+import { useRef } from 'react';
 
-import { useIsMobile } from "~/hooks/use-is-mobile";
-import { useMenu } from "~/hooks/use-menu";
-import { useOutsideClick } from "~/hooks/use-outside-click";
+import { useIsMobile } from '~/hooks/use-is-mobile';
+import { useMenu } from '~/hooks/use-menu';
+import { useOutsideClick } from '~/hooks/use-outside-click';
+import { useUser } from '~/hooks/use-user';
 
-import { useUser } from "~/hooks/use-user";
-
-import { MenuBody } from "./menu-body";
-import { Aside, MenuHeader } from "./menu-styled";
-import type { MenuType } from "./types";
+import { MenuBody } from './menu-body';
+import { Aside, MenuHeader } from './menu-styled';
+import type { MenuType } from './types';
 
 export function MenuClient({ menu }: { menu: MenuType[] }) {
   const isMobile = useIsMobile();

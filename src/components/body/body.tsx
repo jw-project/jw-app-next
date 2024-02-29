@@ -1,9 +1,10 @@
-"use client";
+'use client';
 
-import { Inter } from "next/font/google";
-import { useContextTranslation } from "~/global-context/translation";
+import { Inter } from 'next/font/google';
 
-const inter = Inter({ subsets: ["latin"] });
+import { useContextTranslation } from '~/global-context/translation';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export function Body({
   children,

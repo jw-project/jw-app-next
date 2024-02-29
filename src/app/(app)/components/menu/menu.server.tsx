@@ -1,8 +1,9 @@
-"use server";
+'use server';
 
-import { remoteConfig } from "firebase-admin";
-import { MenuClient } from "./menu.client";
-import type { RemoteConfigParameterValue } from "firebase-admin/remote-config";
+import { remoteConfig } from 'firebase-admin';
+import type { RemoteConfigParameterValue } from 'firebase-admin/remote-config';
+
+import { MenuClient } from './menu.client';
 
 export async function Menu() {
   const {

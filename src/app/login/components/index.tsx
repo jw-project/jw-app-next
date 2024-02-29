@@ -1,7 +1,9 @@
-"use client";
+'use client';
 
-import { LoadingSubtitle, LoadingTitle, Overlay } from "./styled";
-import { startTransition, useEffect } from "react";
+import { startTransition, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
+
+import type { FirebaseOptions } from 'firebase/app';
 import {
   getAuth,
   GoogleAuthProvider,
@@ -9,21 +11,22 @@ import {
   signInWithPopup,
   signInWithRedirect,
   type User,
-} from "firebase/auth";
-import { firebaseClientConnection } from "~/services/firebase-connection.client";
-import type { FirebaseOptions } from "firebase/app";
-import { handleLogin } from "../login.server";
-import { useSearchParams } from "next/navigation";
-import { useTranslation } from "~/hooks/use-translation";
+} from 'firebase/auth';
+
+import { useTranslation } from '~/hooks/use-translation';
+import { firebaseClientConnection } from '~/services/firebase-connection.client';
+
+import { handleLogin } from '../login.server';
+import { LoadingSubtitle, LoadingTitle, Overlay } from './styled';
 
 export function Login({
   firebaseOptions,
 }: {
   firebaseOptions: FirebaseOptions;
 }) {
-  const { translate } = useTranslation("routes.login");
+  const { translate } = useTranslation('routes.login');
   const searchParams = useSearchParams();
-  const redirect = searchParams.get("redirect");
+  const redirect = searchParams.get('redirect');
 
   const redirectToLogin = () => {
     const provider = new GoogleAuthProvider();
@@ -70,8 +73,8 @@ export function Login({
   return (
     <Overlay>
       {/* <Spinner /> */}
-      <LoadingTitle>{translate("wait")}</LoadingTitle>
-      <LoadingSubtitle>{translate("description")}</LoadingSubtitle>
+      <LoadingTitle>{translate('wait')}</LoadingTitle>
+      <LoadingSubtitle>{translate('description')}</LoadingSubtitle>
     </Overlay>
   );
 }

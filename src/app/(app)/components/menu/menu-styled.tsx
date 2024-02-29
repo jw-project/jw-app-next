@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { w } from "windstitch";
+import Link from 'next/link';
+
+import { w } from 'windstitch';
 
 export const Aside = w.aside(
   `
@@ -15,9 +16,9 @@ export const Aside = w.aside(
 `,
   {
     variants: {
-      expanded: (expanded: boolean) => (expanded ? "left-0" : "lg:left-0"),
+      expanded: (expanded: boolean) => (expanded ? 'left-0' : 'lg:left-0'),
     },
-    transient: ["expanded"],
+    transient: ['expanded'],
   },
 );
 
@@ -58,9 +59,9 @@ export const LinkMenuStyled = w(Link, {
 `,
   variants: {
     selected: (selected: boolean) =>
-      selected ? "bg-gray-700 dark:bg-gray-800" : "",
+      selected ? 'bg-gray-700 dark:bg-gray-800' : '',
   },
-  transient: ["selected"],
+  transient: ['selected'],
 });
 
 export const LinkLabelMenuStyled = w.span(``);

@@ -34,6 +34,7 @@
     ".next/types/**/*.ts",
     ".eslintrc.js",
     "next.config.mjs",
+    "postcss.config.js",
   ],
   "exclude": [
     "node_modules"

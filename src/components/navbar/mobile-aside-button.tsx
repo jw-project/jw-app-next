@@ -1,8 +1,8 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
-import { useMenu } from "~/hooks/use-menu";
+import { useMenu } from '~/hooks/use-menu';
 
-import { Icon } from "../commons/icon";
+import { Icon } from '../commons/icon';
 
 const MobileAsideButtonStyled = w.div(`
     lg:hidden

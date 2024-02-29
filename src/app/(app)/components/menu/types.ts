@@ -1,5 +1,5 @@
-import type { IconOpts } from "~/components/commons/icon";
-import type { AllPermissions } from "~/entities/permissions";
+import type { IconOpts } from '~/components/commons/icon';
+import type { AllPermissions } from '~/entities/permissions';
 
 export type MenuListType = {
   label: string;

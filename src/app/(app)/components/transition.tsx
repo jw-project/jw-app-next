@@ -1,8 +1,10 @@
-"use client";
+'use client';
 
-import { Transition as TransitionHeadless } from "@headlessui/react";
-import type { PropsWithChildren } from "react";
-import { BodyMargin } from "~/components/body/body-margin";
+import type { PropsWithChildren } from 'react';
+
+import { Transition as TransitionHeadless } from '@headlessui/react';
+
+import { BodyMargin } from '~/components/body/body-margin';
 
 export function Transition({ children }: PropsWithChildren) {
   const { show } = { show: true }; //useTransition();

@@ -1,9 +1,10 @@
-"use server";
+'use server';
 
-import { getAuth } from "firebase-admin/auth";
-import type { FirebaseOptions } from "firebase/app";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+import { getAuth } from 'firebase-admin/auth';
+import type { FirebaseOptions } from 'firebase/app';
 
 export async function getFirebaseEnvs(): Promise<FirebaseOptions> {
   return {
@@ -26,8 +27,8 @@ export async function handleLogin({
 }) {
   const decodedToken = await getAuth().verifyIdToken(accessToken);
 
-  cookies().set("fb:token", accessToken);
-  cookies().set("uidUser", decodedToken.uid);
+  cookies().set('fb:token', accessToken);
+  cookies().set('uidUser', decodedToken.uid);
 
-  redirect(redirectUrl || "/");
+  redirect(redirectUrl || '/');
 }

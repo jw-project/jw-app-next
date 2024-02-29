@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import { Fragment } from 'react';
 
-import { Transition } from "@headlessui/react";
+import { Transition } from '@headlessui/react';
 
-import { useSave } from "~/hooks/use-save";
+import { useSave } from '~/hooks/use-save';
 
-import { Icon } from "../commons/icon";
+import { Icon } from '../commons/icon';
 
 export function SavingIndicator() {
   const { isSaving } = useSave();

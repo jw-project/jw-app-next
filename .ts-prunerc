@@ -1,0 +1,3 @@
+{
+  "ignore": "route.tsx|root.tsx|tailwind.config.ts|entry.server.tsx"
+}

@@ -1,4 +1,4 @@
-import { w } from "windstitch";
+import { w } from 'windstitch';
 
 export const HeaderIndex = w.header(`
     pt-32

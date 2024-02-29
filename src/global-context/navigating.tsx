@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useRouter } from "next/router";
 import {
   createContext,
   useEffect,
   useState,
   type PropsWithChildren,
-} from "react";
+} from 'react';
+import { useRouter } from 'next/router';
 
 export const NavigatingContext = createContext<{
   loading: boolean;
@@ -24,14 +24,14 @@ export const NavigatingProvider = ({ children }: PropsWithChildren) => {
     const handleComplete = (url: string) =>
       url === router.asPath && setLoading(false);
 
-    router.events.on("routeChangeStart", handleStart);
-    router.events.on("routeChangeComplete", handleComplete);
-    router.events.on("routeChangeError", handleComplete);
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleComplete);
 
     return () => {
-      router.events.off("routeChangeStart", handleStart);
-      router.events.off("routeChangeComplete", handleComplete);
-      router.events.off("routeChangeError", handleComplete);
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleComplete);
     };
   }, []);
 

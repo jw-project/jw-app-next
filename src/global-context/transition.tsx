@@ -3,8 +3,9 @@ import {
   useEffect,
   useState,
   type PropsWithChildren,
-} from "react";
-import { useNavigating } from "~/hooks/use-navigating";
+} from 'react';
+
+import { useNavigating } from '~/hooks/use-navigating';
 
 export const TransitionContext = createContext<{
   show: boolean;
