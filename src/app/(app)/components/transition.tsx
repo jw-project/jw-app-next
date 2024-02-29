@@ -5,14 +5,15 @@ import type { PropsWithChildren } from 'react';
 import { Transition as TransitionHeadless } from '@headlessui/react';
 
 import { BodyMargin } from '~/components/body/body-margin';
+import { useTransition } from '~/hooks/use-transition';
 
 export function Transition({ children }: PropsWithChildren) {
-  const { show } = { show: true }; //useTransition();
+  const { transitioning } = useTransition();
 
   return (
     <TransitionHeadless
       as={BodyMargin}
-      show={show}
+      show={!transitioning}
       enter="transition-opacity duration-300"
       enterFrom="opacity-0"
       enterTo="opacity-100"

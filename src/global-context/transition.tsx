@@ -1,34 +1,35 @@
+'use client';
+
 import {
   createContext,
   useEffect,
   useState,
   type PropsWithChildren,
 } from 'react';
-
-import { useNavigating } from '~/hooks/use-navigating';
+import { usePathname } from 'next/navigation';
 
 export const TransitionContext = createContext<{
-  show: boolean;
-  toggleTransition: () => void;
+  transitioning: boolean;
+  setTransition: () => void;
 }>({
-  show: true,
-  toggleTransition: () => {},
+  transitioning: true,
+  setTransition: () => {},
 });
 
 export const TransitionProvider = ({ children }: PropsWithChildren) => {
-  const [show, setShow] = useState(true);
-  const { loading } = useNavigating();
+  const [transitioning, setTransitioning] = useState(false);
+  const router = usePathname();
 
   useEffect(() => {
-    setShow(loading);
-  }, [loading]);
+    setTransitioning(false);
+  }, [router]);
 
-  const toggleTransition = () => {
-    setShow((current) => !current);
+  const setTransition = () => {
+    setTransitioning(true);
   };
 
   return (
-    <TransitionContext.Provider value={{ show, toggleTransition }}>
+    <TransitionContext.Provider value={{ transitioning, setTransition }}>
       {children}
     </TransitionContext.Provider>
   );

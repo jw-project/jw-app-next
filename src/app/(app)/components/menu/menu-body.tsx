@@ -20,15 +20,15 @@ import type { MenuListType, MenuType } from './types';
 function MenuLink({ list }: { list: MenuListType[] }) {
   const { translate } = useTranslation('menu');
   const { closeMenu } = useMenu();
-  const { toggleTransition } = useTransition();
+  const { setTransition } = useTransition();
   const pathname = usePathname();
 
-  const checkPathname = (to: string) => Boolean(pathname === to);
+  const checkPathname = (to: string) => Boolean(pathname.slice(1) === to);
 
   const onLinkClick = (to: string) => {
     closeMenu();
     if (!checkPathname(to)) {
-      toggleTransition();
+      setTransition();
     }
   };
 
@@ -37,7 +37,7 @@ function MenuLink({ list }: { list: MenuListType[] }) {
       {list.map(({ icon, label, to }) => (
         <li key={label}>
           <LinkMenuStyled
-            href={to}
+            href={`/${to}`}
             onClick={() => onLinkClick(to)}
             selected={checkPathname(to)}
           >
