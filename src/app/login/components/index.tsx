@@ -16,7 +16,7 @@ import {
 import { useTranslation } from '~/hooks/use-translation';
 import { firebaseClientConnection } from '~/services/firebase-connection.client';
 
-import { handleLogin } from '../login.server';
+import { handleLogin } from '../server/login';
 import { LoadingSubtitle, LoadingTitle, Overlay } from './styled';
 
 export function Login({
