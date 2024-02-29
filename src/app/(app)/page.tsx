@@ -5,10 +5,9 @@ import { useRouter } from 'next/navigation';
 import { Button } from '~/components/commons/button';
 import { Col, Grid } from '~/components/commons/grid';
 import { Paragraph, Title } from '~/components/commons/typography';
+import { ContainerIndex, HeaderIndex } from '~/components/root-app';
 import { useTranslation } from '~/hooks/use-translation';
 import { useUser } from '~/hooks/use-user';
-
-import { ContainerIndex, HeaderIndex } from './components';
 
 export default function Home() {
   const { congregationId, email } = useUser();

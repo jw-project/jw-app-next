@@ -13,10 +13,10 @@ import {
   type User,
 } from 'firebase/auth';
 
+import { handleLogin } from '~/actions/login/login.server';
 import { useTranslation } from '~/hooks/use-translation';
 import { firebaseClientConnection } from '~/services/firebase-connection.client';
 
-import { handleLogin } from '../server/login';
 import { LoadingSubtitle, LoadingTitle, Overlay } from './styled';
 
 export function Login({

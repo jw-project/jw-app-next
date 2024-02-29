@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
 
-import { Menu } from './menu/menu.server';
-import { Navbar } from './navbar/navbar';
+import { Menu } from '../menu/menu.server';
+import { Navbar } from '../navbar/navbar';
 import { Transition } from './transition';
 
 export function BaseLayout({ children }: PropsWithChildren) {

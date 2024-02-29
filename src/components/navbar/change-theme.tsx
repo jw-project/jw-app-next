@@ -2,11 +2,10 @@
 
 import { startTransition } from 'react';
 
+import { changeTheme } from '~/actions/user/change-theme.server';
 import { Icon } from '~/components/commons/icon';
 import { Tooltip } from '~/components/commons/tooltip';
 import { useTheme } from '~/hooks/use-theme';
-
-import { changeTheme } from './change-theme.server';
 
 export function ChangeTheme() {
   const { theme, toggleTheme } = useTheme();
