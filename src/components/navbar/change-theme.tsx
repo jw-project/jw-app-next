@@ -11,7 +11,7 @@ export function ChangeTheme() {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
-  const changeHandle = async () => {
+  const changeHandle = () => {
     const newTheme = toggleTheme();
 
     startTransition(() => {

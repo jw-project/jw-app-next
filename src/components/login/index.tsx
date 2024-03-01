@@ -10,7 +10,6 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   signInWithRedirect,
-  type User,
 } from 'firebase/auth';
 
 import { handleLogin } from '~/actions/login/login.server';
@@ -47,10 +46,9 @@ export function Login({
       (user) => {
         if (user) {
           startTransition(() => {
-            user.getIdToken().then(() => {
+            user.getIdToken().then((accessToken) => {
               handleLogin({
-                accessToken: (user as User & { accessToken: string })
-                  .accessToken,
+                accessToken,
                 redirectUrl: redirect,
               });
             });

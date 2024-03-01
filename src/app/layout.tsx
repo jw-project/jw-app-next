@@ -10,7 +10,7 @@ import { Body } from '~/components/body/body';
 import { ThemeProvider, type Theme } from '~/global-context/theme';
 import { LanguageProvider } from '~/global-context/translation';
 import type { Translations } from '~/hooks/use-translation';
-import { getTranslateResources } from '~/utils/i18n.server';
+import { getTranslateResources } from '~/services/i18n.server';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {

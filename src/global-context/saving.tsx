@@ -1,15 +1,18 @@
 'use client';
 
-import { createContext, useState, type PropsWithChildren } from 'react';
+import {
+  createContext,
+  startTransition,
+  useState,
+  type PropsWithChildren,
+} from 'react';
 
-import axios, { type AxiosError } from 'axios';
 import { toast } from 'react-hot-toast';
 
-// import { useRevalidator } from '~/hooks/use-revalidate';
-// import type { HttpError, InputError } from '~/services/api/throws-errors';
+import type { ActionResponse } from '~/actions/types';
 
 type SavingDataType = {
-  url: string;
+  serverAction: (data: object) => ActionResponse<object>;
   formData: object;
   id: string;
 };
@@ -22,7 +25,10 @@ type FormInstance = {
   formIntanceId: string;
 };
 
-export type ErrorsApiListType = InputError & FormInstance;
+export type ErrorsApiListType = {
+  field: string;
+  message: string;
+} & FormInstance;
 
 type SavingContextType = {
   savingData: Array<SavingDataTypeInternal>;
@@ -49,46 +55,40 @@ export const SavingProvider = ({ children }: PropsWithChildren) => {
     [],
   );
   const [mustRevalidate, setMustRevalidate] = useState(false);
-  // const { revalidate } = useRevalidator();
   const isSaving = Boolean(savingData.length);
 
   const forceRevalidate = () => setMustRevalidate(true);
 
-  function instanceOfInputError(object: any): object is InputError {
-    return 'message' in object && 'field' in object;
-  }
-
   const instanceTimeout = (newData: SavingDataType) => {
-    return setTimeout(async () => {
-      try {
-        const response = await axios.post(
-          `/${newData.url}`.replace(/^\/{2,}/, '/'),
-          newData.formData,
-        );
-        addSuccessApi({ ...response.data, formIntanceId: newData.id });
-      } catch (e) {
-        const axiosError = e as AxiosError<HttpError>;
+    return setTimeout(() => {
+      startTransition(() => {
+        newData
+          .serverAction(newData.formData)
+          .then((response) => {
+            if (response.success) {
+              addSuccessApi({ ...response, formIntanceId: newData.id });
+            } else {
+              if (response.field) {
+                addErrorsApi({
+                  formIntanceId: newData.id,
+                  field: response.field,
+                  message: response.message,
+                });
 
-        if (
-          axiosError.response &&
-          instanceOfInputError(axiosError.response.data)
-        ) {
-          const responseError = axiosError.response.data;
-          addErrorsApi({
-            formIntanceId: newData.id,
-            field: responseError.field,
-            message: responseError.message,
+                return;
+              }
+
+              if (response.message) {
+                toast.error(response.message);
+              }
+
+              console.error('Error saving data:', response.message);
+            }
+          })
+          .finally(() => {
+            removeSavingData(newData);
           });
-        }
-
-        if (axiosError.response?.data.feedback) {
-          toast.error(axiosError.response?.data.message);
-        }
-
-        console.error('Error saving data:', axiosError.message);
-      } finally {
-        removeSavingData(newData);
-      }
+      });
     }, 2000);
   };
 

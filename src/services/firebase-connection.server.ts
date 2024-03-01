@@ -5,6 +5,7 @@ import { cookies } from 'next/headers';
 import { firestore } from 'firebase-admin';
 import { getAuth } from 'firebase-admin/auth';
 
+import { UnauthorizedError } from '~/actions/http-responses';
 import { PermissionsEnum } from '~/entities/permissions';
 import type { PublisherEntity } from '~/entities/publisher';
 
@@ -15,15 +16,11 @@ type GetAuthenticatedUserOptions = {
 export async function getAuthenticatedUser(
   options?: GetAuthenticatedUserOptions,
 ) {
-  // request: Request,
-  // options?: GetAuthenticatedUserOptions,
-  // firebaseAdminConnection();
   const cookieStore = cookies();
   const uidUser = cookieStore.get('uidUser')?.value;
 
   if (!uidUser) {
-    // throw new UnauthorizedError('No session');
-    throw new Error('No session');
+    throw new UnauthorizedError('No session');
   }
 
   const cache = cacheUser.get<PublisherEntity>(uidUser);
@@ -39,8 +36,7 @@ export async function getAuthenticatedUser(
 
   if (!userRecord) {
     console.info('Error fetching auth user data');
-    // throw new UnauthorizedError('No session');
-    throw new Error('No session');
+    throw new UnauthorizedError('No session');
   }
 
   const {
