@@ -3,6 +3,7 @@
 import {
   createContext,
   startTransition,
+  useMemo,
   useState,
   type PropsWithChildren,
 } from 'react';
@@ -42,8 +43,6 @@ type SavingContextType = {
   // errors control
   errorsList: Array<ErrorsApiListType>;
   removeErrorsApi: (id: string) => void;
-  // force revalidate
-  forceRevalidate: () => void;
 };
 
 //
@@ -54,10 +53,7 @@ export const SavingProvider = ({ children }: PropsWithChildren) => {
   const [savingData, setSavingData] = useState<Array<SavingDataTypeInternal>>(
     [],
   );
-  const [mustRevalidate, setMustRevalidate] = useState(false);
-  const isSaving = Boolean(savingData.length);
-
-  const forceRevalidate = () => setMustRevalidate(true);
+  const isSaving = useMemo(() => Boolean(savingData.length), [savingData]);
 
   const instanceTimeout = (newData: SavingDataType) => {
     return setTimeout(() => {
@@ -116,13 +112,7 @@ export const SavingProvider = ({ children }: PropsWithChildren) => {
 
   const removeSavingData = (removeData: SavingDataType) => {
     setSavingData((current) => {
-      const newSavingData = current.filter(({ id }) => id !== removeData.id);
-      if (newSavingData.length === 0 && mustRevalidate) {
-        // revalidate();
-        setMustRevalidate(false);
-      }
-
-      return newSavingData;
+      return current.filter(({ id }) => id !== removeData.id);
     });
   };
 
@@ -162,8 +152,6 @@ export const SavingProvider = ({ children }: PropsWithChildren) => {
         //
         errorsList,
         removeErrorsApi,
-        //
-        forceRevalidate,
       }}
     >
       {children}
