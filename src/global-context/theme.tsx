@@ -7,12 +7,14 @@ import type { ZIndex } from '~/components/commons/backdrop';
 export type Theme = 'light' | 'dark';
 
 type ShowBackdropOptions = {
+  fade?: boolean;
   zIndex?: ZIndex;
 };
 
 export const ThemeContext = createContext<{
   theme: Theme;
   toggleTheme: (theme?: Theme) => Theme;
+  backdropFade: boolean;
   backdropZIndex: ZIndex;
   backdropIsShow: boolean;
   showBackdrop: (options?: ShowBackdropOptions) => void;
@@ -20,6 +22,7 @@ export const ThemeContext = createContext<{
 }>({
   theme: 'light',
   toggleTheme: () => 'light',
+  backdropFade: false,
   backdropZIndex: 40,
   backdropIsShow: false,
   showBackdrop: () => {},
@@ -32,9 +35,11 @@ export const ThemeProvider = ({
 }: PropsWithChildren<{ defaultTheme: Theme }>) => {
   const [theme, setTheme] = useState(defaultTheme);
   const [backdrop, setBackdrop] = useState(false);
+  const [fade, setFade] = useState(false);
   const [zIndex, setZIndex] = useState<ZIndex>(40);
 
   const showBackdrop = (options?: ShowBackdropOptions) => {
+    setFade(options?.fade || false);
     setBackdrop(true);
     setZIndex(options?.zIndex || 40);
   };
@@ -64,6 +69,7 @@ export const ThemeProvider = ({
       value={{
         theme,
         toggleTheme,
+        backdropFade: fade,
         backdropZIndex: zIndex,
         backdropIsShow: backdrop,
         showBackdrop,

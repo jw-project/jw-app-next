@@ -35,16 +35,18 @@ const BackdropStyled = w.div(
 export type ZIndex = W.Infer<typeof BackdropStyled>['zindex'];
 
 export function Backdrop() {
-  const { backdropIsShow, backdropZIndex } = useTheme();
+  const { backdropFade, backdropIsShow, backdropZIndex } = useTheme();
 
   return (
     <Transition
       as={Fragment}
       show={backdropIsShow}
-      enter="transform transition duration-200"
+      enter={backdropFade ? 'transform transition duration-200' : ''}
       enterFrom="opacity-0"
       enterTo="opacity-100"
-      leave="transform duration-200 transition ease-in-out"
+      leave={
+        backdropFade ? 'transform duration-200 transition ease-in-out' : ''
+      }
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >

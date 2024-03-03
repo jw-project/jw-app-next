@@ -23,7 +23,11 @@ function MenuLink({ list }: { list: MenuListType[] }) {
   const { setTransition } = useTransition();
   const pathname = usePathname();
 
-  const checkPathname = (to: string) => Boolean(pathname.slice(1) === to);
+  const checkPathname = (to: string) => {
+    const [firstPart, secondPart] = pathname.slice(1).split('/');
+
+    return [firstPart, secondPart].filter(Boolean).join('/') === to;
+  };
 
   const onLinkClick = (to: string) => {
     closeMenu();

@@ -31,7 +31,7 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
 
   const openMenu = () => {
     setShowMenu(true);
-    showBackdrop({ zIndex: 20 });
+    showBackdrop({ zIndex: 20, fade: true });
   };
 
   const closeMenu = () => {
