@@ -8,19 +8,21 @@ import {
   type PropsWithChildren,
 } from 'react';
 
+import type { FieldValues } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
 
-import type { ActionResponse } from '~/actions/types';
+import type { ActionResponsePromise } from '~/actions/types';
 
-type SavingDataType = {
-  serverAction: (data: object) => ActionResponse<object>;
-  formData: object;
+type SavingDataType<TFieldValues extends FieldValues = object> = {
+  serverAction: (data: TFieldValues) => ActionResponsePromise<TFieldValues>;
+  formData: TFieldValues;
   id: string;
 };
 
-type SavingDataTypeInternal = SavingDataType & {
-  timeout: NodeJS.Timeout;
-};
+type SavingDataTypeInternal<TFieldValues extends FieldValues = object> =
+  SavingDataType<TFieldValues> & {
+    timeout: NodeJS.Timeout;
+  };
 
 type FormInstance = {
   formIntanceId: string;
@@ -31,11 +33,11 @@ export type ErrorsApiListType = {
   message: string;
 } & FormInstance;
 
-type SavingContextType = {
-  savingData: Array<SavingDataTypeInternal>;
+export type SavingContextType<TFieldValues extends FieldValues = object> = {
+  savingData: Array<SavingDataTypeInternal<TFieldValues>>;
   isSaving: boolean;
-  addSavingData: (newData: SavingDataType) => void;
-  removeSavingData: (removeData: SavingDataType) => void;
+  addSavingData: (newData: SavingDataType<TFieldValues>) => void;
+  removeSavingData: (removeData: SavingDataType<TFieldValues>) => void;
   // success control
   successApiList: Array<any>;
   removeSuccessApi: (id: string) => void;

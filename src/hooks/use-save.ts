@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 
-import { SavingContext } from '~/global-context/saving';
+import type { FieldValues } from 'react-hook-form';
 
-export const useSave = () => useContext(SavingContext);
+import { SavingContext, type SavingContextType } from '~/global-context/saving';
+
+export const useSave = <T extends FieldValues>() =>
+  useContext(SavingContext) as unknown as SavingContextType<T>;

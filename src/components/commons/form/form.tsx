@@ -19,7 +19,8 @@ import {
 import { v4 as uuid } from 'uuid';
 import type { ZodType, ZodTypeDef } from 'zod';
 
-import type { ActionResponse } from '~/actions/types';
+import type { HttpSuccess } from '~/actions/http-responses';
+import type { ActionResponsePromise } from '~/actions/types';
 import type { ErrorsApiListType } from '~/global-context/saving';
 import { useSave } from '~/hooks/use-save';
 
@@ -43,12 +44,12 @@ export function Form<
 }: PropsWithChildren<{
   schema: ZodType<TOutputField, TDef, TFieldValues>;
   defaultValues?: DefaultValues<TFieldValues>;
-  serverAction: (data: object) => ActionResponse<object>;
+  serverAction: (data: TFieldValues) => ActionResponsePromise<TFieldValues>;
   mode?: 'onChange' | 'onSubmit';
   builder?: FormBuilderProps;
   disabled?: boolean;
   onFormStatusChange?: (formState: FormState<TFieldValues>) => void;
-  onFormApiSuccess?: (success: any) => void;
+  onFormApiSuccess?: (success: HttpSuccess<TFieldValues>) => void;
   onFormApiErrors?: (errors: ErrorsApiListType) => void;
 }>) {
   const idInstance = useMemo(() => uuid(), []);
@@ -58,7 +59,7 @@ export function Form<
     removeErrorsApi,
     successApiList,
     removeSuccessApi,
-  } = useSave();
+  } = useSave<TFieldValues>();
 
   const methods = useForm({
     mode,
@@ -68,7 +69,6 @@ export function Form<
   });
 
   const onSubmit = (data: TFieldValues): void => {
-    // debugger;
     addSavingData({
       serverAction,
       formData: data,

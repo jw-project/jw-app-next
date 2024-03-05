@@ -6,14 +6,14 @@ import { CongregationCrud } from '~/services/api/congregation/congregation.serve
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
 import { BadRequestError, HttpSuccess, InputError } from '../http-responses';
-import type { ActionResponse } from '../types';
+import type { ActionResponsePromise } from '../types';
 import { ValidatePermissions } from '../validate-permissions';
 import { validateSchema } from '../validate-schema';
 import { congregationFormSchema } from './validations';
 
 export async function saveCongregation(
   congregationReq: CongregationEntity,
-): ActionResponse<CongregationEntity> {
+): ActionResponsePromise<CongregationEntity> {
   try {
     const { congregationId, permissions, displayName, email } =
       await getAuthenticatedUser();

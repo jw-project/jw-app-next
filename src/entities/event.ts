@@ -25,10 +25,10 @@ export type EventEntity = {
   id: string;
   type: EventType;
   name: string;
-  description: string;
-  link: string;
-  startDate: string;
-  endDate: string;
-  startTime: string;
-  endTime: string;
+  description?: string;
+  link?: string;
+  startDate?: string;
+  endDate?: string;
+  startTime?: string;
+  endTime?: string;
 };

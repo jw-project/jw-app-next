@@ -9,6 +9,7 @@ import {
 import { EventType } from '~/entities/event';
 
 export const eventFormSchema = z.object({
+  id: z.string(),
   type: z.nativeEnum(EventType, {
     errorMap: () => ({ message: INVALID_FIELD_I18N_KEY }),
   }),

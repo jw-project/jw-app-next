@@ -7,7 +7,7 @@ import {
   HttpSuccess,
   NotFoundError,
 } from '~/actions/http-responses';
-import type { ActionResponse } from '~/actions/types';
+import type { ActionResponsePromise } from '~/actions/types';
 import { ValidatePermissions } from '~/actions/validate-permissions';
 import { validateSchema } from '~/actions/validate-schema';
 import type { EventEntity } from '~/entities/event';
@@ -17,9 +17,8 @@ import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 import { eventFormSchema } from './validations';
 
 export async function saveEvent(
-  eventId: string,
   eventReq: EventEntity,
-): ActionResponse<EventEntity> {
+): ActionResponsePromise<EventEntity> {
   try {
     const { congregationId, permissions } = await getAuthenticatedUser();
 
@@ -27,7 +26,7 @@ export async function saveEvent(
 
     new ValidatePermissions(permissions, 'events').canWrite();
 
-    if (!eventId) {
+    if (!eventReq.id) {
       throw new NotFoundError();
     }
 
@@ -35,12 +34,14 @@ export async function saveEvent(
 
     await crud.save({
       document: eventReq,
-      id: eventId,
+      id: eventReq.id,
     });
 
     revalidatePath('/congregation/events');
 
-    return new HttpSuccess(await crud.get({ id: eventId })).toServerAction();
+    return new HttpSuccess(
+      await crud.get({ id: eventReq.id }),
+    ).toServerAction();
   } catch (error) {
     return new BadRequestError(String(error)).toServerAction();
   }

@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "target": "ES2019",
     "incremental": true,
     "plugins": [
       {
@@ -34,7 +35,7 @@
     ".next/types/**/*.ts",
     ".eslintrc.js",
     "next.config.mjs",
-    "postcss.config.js",
+    "postcss.config.js"
   ],
   "exclude": [
     "node_modules"

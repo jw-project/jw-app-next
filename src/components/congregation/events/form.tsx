@@ -20,7 +20,7 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
       key={id}
       schema={eventFormSchema}
       defaultValues={data}
-      serverAction={(data) => saveEvent(id, data)}
+      serverAction={saveEvent}
       disabled={disabled}
       builder={{
         disabled: !canWrite,
