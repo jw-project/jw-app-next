@@ -20,10 +20,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function RootLayout({ children }: PropsWithChildren) {
-  let resources = global.cacheConfigs.get<Translations>('resources');
-  if (!resources) {
-    resources = await getTranslateResources();
-    cacheConfigs.set('resources', resources);
+  let resources = global.cacheConfigs?.get<Translations>('resources');
+  try {
+    if (!resources) {
+      resources = await getTranslateResources();
+      global.cacheConfigs.set('resources', resources);
+    }
+  } catch (error) {
+    resources = {};
   }
   const language =
     cookies().get('language')?.value ||

@@ -10,7 +10,7 @@ export async function changeTheme(theme: Theme) {
   const { uidUser } = await getAuthenticatedUser();
 
   await saveTheme(theme);
-  global.cacheUser?.del(uidUser);
+  global.cacheUser.del(uidUser);
   revalidatePath('/(app)', 'layout');
 
   return 'ok';
