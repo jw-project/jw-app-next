@@ -13,18 +13,3 @@ export const saveTheme = async (theme: Theme) => {
     .doc(id)
     .update({ theme });
 };
-
-// TODO remover não usado
-// export const saveLanguage = async (request: Request) => {
-//   const { language } = await request.json();
-//   const { congregationId, id, uidUser } = await getAuthenticatedUser(request);
-
-//   await firestore()
-//     .collection('congregation')
-//     .doc(congregationId)
-//     .collection('publishers')
-//     .doc(id)
-//     .update({ language });
-
-//   cacheUser?.del(uidUser);
-// };
