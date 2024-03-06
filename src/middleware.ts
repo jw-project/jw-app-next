@@ -1,12 +1,15 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const { origin, href } = request.nextUrl;
+  const { protocol, href } = request.nextUrl;
+  const hostname = request.headers.get('Host');
   const session = request.cookies.get('fb:token');
   const uidUser = request.cookies.get('uidUser');
 
   if (!session || !uidUser) {
-    return NextResponse.redirect(`${origin}/login?redirect=${href}`);
+    return NextResponse.redirect(
+      `${protocol}//${hostname}/login?redirect=${href}`,
+    );
   }
 
   return NextResponse.next();
