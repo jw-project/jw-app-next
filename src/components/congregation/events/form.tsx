@@ -3,7 +3,6 @@
 import { saveEvent } from '~/actions/congregation/events/save';
 import { eventFormSchema } from '~/actions/congregation/events/validations';
 import { Form } from '~/components/commons/form/form';
-import { setVoidOptionWhenNew } from '~/components/commons/form/utils';
 import type { EntityForm } from '~/components/commons/table/types';
 import { eventOptions, type EventEntity } from '~/entities/event';
 import { useTranslation } from '~/hooks/use-translation';
@@ -30,7 +29,7 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
             name: 'type',
             label: translate('type'),
             type: 'select',
-            options: setVoidOptionWhenNew(eventOptions(), id),
+            options: eventOptions(),
           },
           {
             name: 'name',

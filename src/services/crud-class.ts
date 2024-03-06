@@ -32,7 +32,7 @@ export abstract class CrudClass<Entity extends DocumentData> {
     return /^[0-9a-zA-Z]{20}$/.test(id);
   }
 
-  async getNewId(): Promise<string> {
+  getNewId(): string {
     const newDocument = this.collection.doc();
 
     return newDocument.id;

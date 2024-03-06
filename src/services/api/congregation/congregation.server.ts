@@ -17,7 +17,7 @@ export class CongregationCrud extends CrudClass<CongregationEntity> {
     throw new Error(error);
   }
 
-  getNewId(): Promise<string> {
+  getNewId(): string {
     throw new Error(error);
   }
 
