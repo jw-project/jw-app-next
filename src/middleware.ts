@@ -1,14 +1,17 @@
 import { NextResponse, type NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const { protocol, href } = request.nextUrl;
-  const hostname = request.headers.get('Host');
-  const session = request.cookies.get('fb:token');
-  const uidUser = request.cookies.get('uidUser');
+  const { pathname } = request.nextUrl;
+  const hostname = request.headers.get('host');
+  const protocol = request.headers.get('x-forwarded-proto');
+  const baseUrl = `${protocol}://${hostname}`;
+
+  const session = request.cookies.get('fb:token')?.value;
+  const uidUser = request.cookies.get('uidUser')?.value;
 
   if (!session || !uidUser) {
     return NextResponse.redirect(
-      `${protocol}//${hostname}/login?redirect=${href}`,
+      `${baseUrl}/login?redirect=${baseUrl}${pathname}`,
     );
   }
 
