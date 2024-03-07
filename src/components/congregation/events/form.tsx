@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { saveEvent } from '~/actions/congregation/events/save';
 import { eventFormSchema } from '~/actions/congregation/events/validations';
 import { Form } from '~/components/commons/form/form';
@@ -13,6 +15,8 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
   const { permissions } = useUser();
   const { translate } = useTranslation('routes.congregation.events.form');
   const { canWrite } = useValidatePermissions(permissions, 'events');
+  const [dateStart, setDateStart] = useState('');
+  const [dateEnd, setDateEnd] = useState('');
 
   return (
     <Form
@@ -21,6 +25,10 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
       defaultValues={data}
       serverAction={saveEvent}
       disabled={disabled}
+      onFormStatusChange={(_, values) => {
+        setDateStart((c) => values.startDate || c);
+        setDateEnd((c) => values.endDate || c);
+      }}
       builder={{
         disabled: !canWrite,
         cols: 1,
@@ -48,22 +56,24 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
           },
           {
             name: 'startDate',
-            label: translate('start_date'),
+            label: translate('start-date'),
             type: 'date',
+            max: dateEnd,
           },
           {
             name: 'startTime',
-            label: translate('start_time'),
+            label: translate('start-time'),
             type: 'time',
           },
           {
             name: 'endDate',
-            label: translate('end_date'),
+            label: translate('end-date'),
             type: 'date',
+            min: dateStart,
           },
           {
             name: 'endTime',
-            label: translate('end_time'),
+            label: translate('end-time'),
             type: 'time',
           },
         ],

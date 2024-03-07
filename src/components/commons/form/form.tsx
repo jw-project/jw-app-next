@@ -48,7 +48,10 @@ export function Form<
   mode?: 'onChange' | 'onSubmit';
   builder?: FormBuilderProps;
   disabled?: boolean;
-  onFormStatusChange?: (formState: FormState<TFieldValues>) => void;
+  onFormStatusChange?: (
+    formState: FormState<TFieldValues>,
+    values: TFieldValues,
+  ) => void;
   onFormApiSuccess?: (success: HttpSuccess<TFieldValues>) => void;
   onFormApiErrors?: (errors: ErrorsApiListType) => void;
 }>) {
@@ -104,7 +107,7 @@ export function Form<
   }, [errorsList.length]);
 
   useEffect(() => {
-    onFormStatusChange?.(methods.formState);
+    onFormStatusChange?.(methods.formState, methods.getValues());
   }, [methods.formState]);
 
   useEffect(() => {

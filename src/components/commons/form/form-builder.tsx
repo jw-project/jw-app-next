@@ -30,6 +30,8 @@ type CommonField = {
   visible?: boolean;
   colSpan?: ColProps['colSpan'];
   disabled?: boolean;
+  max?: string;
+  min?: string;
 };
 
 type TextField = CommonField & {
@@ -141,6 +143,8 @@ export const FormBuilder = ({
                 label={field.label}
                 type={field.type}
                 disabled={disabled || field.disabled}
+                max={field.max}
+                min={field.min}
               />
             </Col>
           );

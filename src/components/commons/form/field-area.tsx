@@ -1,6 +1,6 @@
 'use client';
 
-import { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 import type { convertHtmlToReact } from '@hedgedoc/html-to-react';
 import { useFormContext } from 'react-hook-form';
