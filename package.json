@@ -50,7 +50,7 @@
     "eslint-plugin-react": "^7.34.0",
     "eslint-plugin-react-server-components": "^1.1.2",
     "eslint-plugin-sonarjs": "^0.24.0",
-    "eslint-plugin-vitest": "^0.3.22",
+    "eslint-plugin-vitest": "^0.3.25",
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "tailwind-scrollbar": "^3.1.0",
