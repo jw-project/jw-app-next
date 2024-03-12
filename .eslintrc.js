@@ -67,6 +67,5 @@ module.exports = {
     '@typescript-eslint',
     'etc',
     'react',
-    'vitest',
   ],
 };

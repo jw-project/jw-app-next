@@ -37,12 +37,12 @@ export async function saveEvent(
       id: eventReq.id,
     });
 
-    revalidatePath('/congregation/events');
-
     return new HttpSuccess(
       await crud.get({ id: eventReq.id }),
     ).toServerAction();
   } catch (error) {
-    return new BadRequestError(String(error)).toServerAction();
+    return new BadRequestError((error as Error).message).toServerAction();
+  } finally {
+    revalidatePath('/congregation/events');
   }
 }

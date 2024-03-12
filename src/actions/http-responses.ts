@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 abstract class ServerActionSpread {
   toServerAction() {
     return {
@@ -21,7 +23,7 @@ export class HttpSuccess<T> extends ServerActionSpread {
 
 // errors
 
-abstract class HttpError extends ServerActionSpread {
+export abstract class HttpError extends ServerActionSpread {
   name: string;
 
   message: string;
@@ -69,4 +71,20 @@ export class InputError extends BadRequestError {
   constructor(field: string, message: string) {
     super(message, { field });
   }
+}
+
+export function catchError(error: unknown): any {
+  if (!(error instanceof HttpError)) {
+    throw error;
+  }
+
+  if (error.status === 404) {
+    return notFound();
+  }
+
+  if (error.status === 403) {
+    throw JSON.stringify(new ForbiddenError(error.message));
+  }
+
+  throw new BadRequestError(error.message);
 }

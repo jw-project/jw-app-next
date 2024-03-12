@@ -6,6 +6,7 @@ import { useContextTranslation } from '~/global-context/translation';
 import { useTheme } from '~/hooks/use-theme';
 
 import { Backdrop } from '../commons/backdrop';
+import { Toast } from '../commons/toast';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,7 +32,7 @@ export function Body({
       >
         <Backdrop />
         {children}
-        {/* <Toast /> */}
+        <Toast />
       </body>
     </html>
   );

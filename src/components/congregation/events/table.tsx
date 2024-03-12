@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
 import type { CoreOptions } from '@tanstack/react-table';
+import toast from 'react-hot-toast';
 
 import { deleteEvents } from '~/actions/congregation/events/delete';
 import { AlignRight } from '~/components/align';
@@ -128,7 +129,7 @@ export function EventsTable({ events }: { events: EventEntity[] }) {
           );
 
           startTransition(() => {
-            deleteEvents(selectedRows);
+            deleteEvents(selectedRows).then((e) => e && toast.error(e.message));
           });
           refGuard(tableRef).resetRowSelection();
         }}

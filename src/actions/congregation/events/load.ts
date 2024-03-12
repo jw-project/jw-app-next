@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 
-import { BadRequestError } from '~/actions/http-responses';
+import { catchError } from '~/actions/http-responses';
 import { ValidatePermissions } from '~/actions/validate-permissions';
 import { EventType, type EventEntity } from '~/entities/event';
 import { EventCrud } from '~/services/api/congregation/event/event.server';
@@ -21,21 +21,25 @@ export async function loadEvents(): Promise<{
 
     return { events };
   } catch (error) {
-    throw new BadRequestError();
+    return catchError(error);
   }
 }
 
 export async function loadEvent({ id }: { id: string }): Promise<EventEntity> {
-  const { congregationId, permissions } = await getAuthenticatedUser();
-  const crud = new EventCrud(congregationId);
+  try {
+    const { congregationId, permissions } = await getAuthenticatedUser();
+    const crud = new EventCrud(congregationId);
 
-  new ValidatePermissions(permissions, 'events').canRead();
+    new ValidatePermissions(permissions, 'events').canRead();
 
-  if (id === 'new') {
-    redirect(`/congregation/events/${crud.getNewId()}`);
+    if (id === 'new') {
+      redirect(`/congregation/events/${crud.getNewId()}`);
+    }
+
+    const event = await crud.get({ id });
+
+    return { ...{ type: EventType.CIRCUIT_ASSEMBLY }, ...event };
+  } catch (error) {
+    return catchError(error);
   }
-
-  const event = await crud.get({ id });
-
-  return { ...{ type: EventType.CIRCUIT_ASSEMBLY }, ...event };
 }

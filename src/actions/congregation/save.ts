@@ -69,6 +69,6 @@ export async function saveCongregation(
       }),
     ).toServerAction();
   } catch (error) {
-    return new BadRequestError(String(error)).toServerAction();
+    return new BadRequestError((error as Error).message).toServerAction();
   }
 }

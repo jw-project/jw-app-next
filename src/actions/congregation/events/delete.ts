@@ -17,8 +17,10 @@ export async function deleteEvents(events: EventEntity[]) {
     const crud = new EventCrud(congregationId);
     await Promise.all(events.map(({ id }) => crud.delete({ id })));
 
-    revalidatePath('/(app)/congregation/events');
+    return null;
   } catch (error) {
-    throw new BadRequestError();
+    return new BadRequestError((error as Error).message).toServerAction();
+  } finally {
+    revalidatePath('/(app)/congregation/events');
   }
 }
