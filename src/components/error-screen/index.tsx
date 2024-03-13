@@ -19,6 +19,7 @@ const ErrorWrapper = w.div(`
 `);
 
 const ErrorColumn = w.div(`
+  xl:gap-16
   lg:gap-4
   lg:flex
 `);
