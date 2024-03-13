@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import type { CongregationEntity } from '~/entities/congregation';
 import { PermissionsEnum, type Permissions } from '~/entities/permissions';
 import { CongregationCrud } from '~/services/api/congregation/congregation.server';
@@ -70,5 +72,7 @@ export async function saveCongregation(
     ).toServerAction();
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
+  } finally {
+    revalidatePath('/(app)', 'layout');
   }
 }
