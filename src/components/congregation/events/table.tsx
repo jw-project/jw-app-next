@@ -8,6 +8,7 @@ import type { CoreOptions } from '@tanstack/react-table';
 import toast from 'react-hot-toast';
 
 import { deleteEvents } from '~/actions/congregation/events/delete';
+import { useEventPage } from '~/app/(app)/congregation/events/context';
 import { AlignRight } from '~/components/align';
 import { Modal } from '~/components/commons/modal';
 import type { ModalRefProps } from '~/components/commons/modal/types';
@@ -19,7 +20,8 @@ import { refGuard } from '~/components/commons/utils/ref-guard';
 import type { EventEntity } from '~/entities/event';
 import { useTranslation } from '~/hooks/use-translation';
 
-export function EventsTable({ events }: { events: EventEntity[] }) {
+export function EventsTable() {
+  const { events } = useEventPage();
   const tableRef = useRef<TableRefProps<EventEntity>>(null);
   const deleteModalRef = useRef<ModalRefProps>(null);
   const [eventsState, setEventsState] = useState<EventEntity[]>(events);

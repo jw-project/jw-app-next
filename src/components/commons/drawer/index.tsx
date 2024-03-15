@@ -35,10 +35,10 @@ export const useDrawer = () => {
 
 export const Drawer = forwardRef(
   (
-    { children, size, footer: Footer, onClose }: DrawerProps,
+    { children, initOpen, size, footer: Footer, onClose }: DrawerProps,
     ref: Ref<DrawerRefProps>,
   ) => {
-    const [drawerIsOpen, setDrawerIsOpen] = useState(false);
+    const [drawerIsOpen, setDrawerIsOpen] = useState(Boolean(initOpen));
     const drawerRef = useRef<HTMLDivElement>(null);
     const isMobile = useIsMobile();
     const { backdropIsShow, showBackdrop, hideBackdrop } = useTheme();

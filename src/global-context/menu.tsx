@@ -24,10 +24,10 @@ export const MenuProvider = ({ children }: PropsWithChildren) => {
   const isMobile = useIsMobile();
 
   useEffect(() => {
-    if (!isMobile) {
+    if (!isMobile && showMenu) {
       closeMenu();
     }
-  }, [isMobile]);
+  }, [isMobile, showMenu]);
 
   const openMenu = () => {
     setShowMenu(true);
