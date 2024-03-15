@@ -4,18 +4,24 @@ import { createContext, useContext, type PropsWithChildren } from 'react';
 
 import type { EventEntity } from '~/entities/event';
 
-type EventPageContextType = {
+type EventPageProviderProps = {
   events: EventEntity[];
 };
 
-export const EventPageContext = createContext<EventPageContextType>({
+type EventPageContextType = {
+  //
+};
+
+export const EventPageContext = createContext<
+  EventPageProviderProps & EventPageContextType
+>({
   events: [],
 });
 
 export const EventPageProvider = ({
   children,
   events,
-}: PropsWithChildren<EventPageContextType>) => {
+}: PropsWithChildren<EventPageProviderProps>) => {
   return (
     <EventPageContext.Provider value={{ events }}>
       {children}
