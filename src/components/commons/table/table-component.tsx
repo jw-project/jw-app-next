@@ -22,14 +22,33 @@ const TableHeadStyled = w.thead(`
   dark:text-gray-400
 `);
 
-const TableRowStyled = w.tr(`
-  bg-white
+const TableRowStyled = w.tr(
+  `
   border-b
-  dark:bg-gray-800
   dark:border-gray-700
-  hover:bg-gray-50
-  dark:hover:bg-gray-600
-`);
+  relative
+`,
+  {
+    variants: {
+      isSelected: (isSelected: boolean) =>
+        isSelected
+          ? 'bg-gray-100 dark:bg-gray-700'
+          : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
+    },
+  },
+);
+
+const SelectedIndicatorStyled = w.div(
+  `
+  w-1
+  h-full
+  absolute
+  top-0
+  left-0
+  bg-blue-500
+  dark:bg-blue-400
+`,
+);
 
 export function TableComponent<Data extends object>() {
   const { table, onLineAction } = useTableContext<Data>();
@@ -57,9 +76,13 @@ export function TableComponent<Data extends object>() {
           <TableRowStyled
             key={row.id}
             onDoubleClick={() => onLineAction?.(row)}
+            isSelected={row.getIsSelected()}
           >
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id} className="px-6 py-4">
+                {row.getIsSelected() && cell.column.getIsFirstColumn() && (
+                  <SelectedIndicatorStyled />
+                )}
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
             ))}

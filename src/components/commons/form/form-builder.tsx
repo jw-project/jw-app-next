@@ -7,6 +7,7 @@ import { Col, Grid, type ColProps, type GridProps } from '../grid';
 import { Subtitle } from '../typography';
 import { Input } from './input';
 import { Select, type SelectOptionsType } from './select';
+import { SubtitleField } from './subtitle-field';
 import { TextArea } from './text-area';
 
 type InputTypeAttribute =
@@ -119,9 +120,9 @@ export const FormBuilder = ({
 
           if (isSubtitleField(field)) {
             return (
-              <Col colSpan={field.colSpan || 2} key={field.name}>
+              <SubtitleField colSpan={field.colSpan || 2} key={field.name}>
                 <Subtitle>{field.label}</Subtitle>
-              </Col>
+              </SubtitleField>
             );
           }
 
