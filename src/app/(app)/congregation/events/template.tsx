@@ -27,7 +27,6 @@ export default function EventTemplate({ children }: PropsWithChildren) {
 
   return (
     <Drawer
-      initOpen={Boolean(slug)}
       size="large"
       ref={formDrawerRef}
       onClose={onClose}
