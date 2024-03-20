@@ -3,9 +3,9 @@
 import type { PropsWithChildren } from 'react';
 
 import { loadEvents } from '~/actions/congregation/events/load';
+import { EventPageProvider } from '~/components/congregation/events/context';
+import { DrawerWrapper } from '~/components/congregation/events/drawer-wrapper';
 import { EventsTable } from '~/components/congregation/events/table';
-
-import { EventPageProvider } from './context';
 
 export default async function EventLayout({ children }: PropsWithChildren) {
   const { events } = await loadEvents();
@@ -13,7 +13,7 @@ export default async function EventLayout({ children }: PropsWithChildren) {
   return (
     <EventPageProvider events={events}>
       <EventsTable />
-      {children}
+      <DrawerWrapper>{children}</DrawerWrapper>
     </EventPageProvider>
   );
 }

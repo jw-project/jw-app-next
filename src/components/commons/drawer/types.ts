@@ -7,7 +7,6 @@ import type { DrawerWrapperStyled } from './styled';
 export type DrawerWrapperStyledType = W.Infer<typeof DrawerWrapperStyled>;
 
 export type DrawerProps = PropsWithChildren<{
-  initOpen?: boolean;
   size?: DrawerWrapperStyledType['size'];
   footer?: () => JSX.Element;
   onClose: () => void;

@@ -8,7 +8,6 @@ import type { CoreOptions } from '@tanstack/react-table';
 import toast from 'react-hot-toast';
 
 import { deleteEvents } from '~/actions/congregation/events/delete';
-import { useEventPage } from '~/app/(app)/congregation/events/context';
 import { AlignRight } from '~/components/align';
 import { Modal } from '~/components/commons/modal';
 import type { ModalRefProps } from '~/components/commons/modal/types';
@@ -19,6 +18,8 @@ import { DateCell, selectorForTable } from '~/components/commons/table/utils';
 import { refGuard } from '~/components/commons/utils/ref-guard';
 import type { EventEntity } from '~/entities/event';
 import { useTranslation } from '~/hooks/use-translation';
+
+import { useEventPage } from './context';
 
 export function EventsTable() {
   const { events } = useEventPage();

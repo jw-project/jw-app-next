@@ -9,7 +9,7 @@ import type { DrawerRefProps } from '~/components/commons/drawer/types';
 
 import { useEventPage } from './context';
 
-export default function EventTemplate({ children }: PropsWithChildren) {
+export function DrawerWrapper({ children }: PropsWithChildren) {
   const formDrawerRef = useRef<DrawerRefProps>(null);
   const { push } = useRouter();
   const { slug } = useParams();
