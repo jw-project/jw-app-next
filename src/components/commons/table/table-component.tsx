@@ -30,8 +30,8 @@ const TableRowStyled = w.tr(
 `,
   {
     variants: {
-      isSelected: (isSelected: boolean) =>
-        isSelected
+      selected: (selected: boolean) =>
+        selected
           ? 'bg-gray-100 dark:bg-gray-700'
           : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
     },
@@ -76,7 +76,7 @@ export function TableComponent<Data extends object>() {
           <TableRowStyled
             key={row.id}
             onDoubleClick={() => onLineAction?.(row)}
-            isSelected={row.getIsSelected()}
+            selected={row.getIsSelected()}
           >
             {row.getVisibleCells().map((cell) => (
               <td key={cell.id} className="px-6 py-4">
