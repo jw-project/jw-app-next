@@ -16,7 +16,8 @@ type PublishersPageProviderProps = {
 
 type PublishersPageContextType = {
   selectedPublisher: PublisherEntity | undefined;
-  tabSelected: PublisherTabsEnum;
+  tabSelected?: PublisherTabsEnum;
+  tabsDisabled: boolean;
 };
 
 export const PublishersPageContext = createContext<
@@ -33,16 +34,19 @@ export const PublishersPageProvider = ({
     () => publishers.find((publisher) => publisher.id === slug),
     [slug],
   );
+  const tabsDisabled = useMemo(
+    () => !Boolean(selectedPublisher),
+    [selectedPublisher],
+  );
   const tabSelected = useMemo(
     () =>
-      Object.values(PublisherTabsEnum).find((tab) => pathname.includes(tab)) ||
-      PublisherTabsEnum.Information,
+      Object.values(PublisherTabsEnum).find((tab) => pathname.includes(tab)),
     [pathname],
   );
 
   return (
     <PublishersPageContext.Provider
-      value={{ publishers, selectedPublisher, tabSelected }}
+      value={{ publishers, selectedPublisher, tabSelected, tabsDisabled }}
     >
       {children}
     </PublishersPageContext.Provider>

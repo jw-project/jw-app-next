@@ -2,15 +2,7 @@ import Link from 'next/link';
 
 import { w } from 'windstitch';
 
-import { Icon, type IconOpts } from '../icon';
-
-export type TabProp = {
-  title: string;
-  icon?: IconOpts;
-  to: string;
-  selected: boolean;
-  disabled?: boolean;
-};
+import { Icon } from '../icon';
 
 export const TabsWrapper = w.div(`
     flex
@@ -53,16 +45,19 @@ export const TabLinkStyled = w(Link, {
     p-4
     rounded-t-lg
     group
+    border-r
+    border-t
+    border-l
 `,
   variants: {
     selected: (selected: boolean) =>
       selected
         ? 'bg-white hover:bg-white text-gray-600'
-        : 'hover:text-gray-600 hover:bg-gray-200',
+        : 'enabled:hover:text-gray-600 enabled:hover:bg-gray-200',
     disabled: (disabled: boolean) =>
       disabled
-        ? 'cursor-not-allowed hover:bg-gray-100 hover:text-gray-500'
-        : '',
+        ? 'cursor-not-allowed text-gray-300 border-dashed border-gray-200'
+        : 'border-transparent',
   },
   transient: ['disabled', 'selected'],
 });

@@ -4,13 +4,8 @@ import { type PropsWithChildren } from 'react';
 
 import { useHorizontalScroll } from '~/hooks/use-horizontal-scroll';
 
-import {
-  TabIconStyled,
-  TabLinkStyled,
-  TabsStyled,
-  TabStyled,
-  type TabProp,
-} from './tabs-styled';
+import { TabIconStyled, TabLinkStyled, TabsStyled, TabStyled } from './styled';
+import type { TabProp } from './types';
 
 export function Tabs(props: PropsWithChildren) {
   const scrollRef = useHorizontalScroll<HTMLUListElement>();
@@ -22,7 +17,7 @@ export function Tab({ title, to, icon, selected, disabled }: TabProp) {
   return (
     <TabStyled>
       <TabLinkStyled
-        href={disabled ? '#' : to}
+        href={disabled ? '' : to}
         selected={selected}
         disabled={Boolean(disabled)}
       >
