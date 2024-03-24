@@ -16,6 +16,7 @@ export type PublisherEntity = {
   congregationId: string;
   email: string;
   name: string;
+  surname: string;
   displayName?: string; // used by firebase
   permissions: Permissions;
   theme: Theme;
