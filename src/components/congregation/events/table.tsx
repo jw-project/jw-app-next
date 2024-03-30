@@ -83,7 +83,7 @@ export function EventsTable() {
         ref={tableRef}
         columns={columns}
         data={eventsState}
-        onLineAction={({ original }) => {
+        onLineDoubleClick={({ original }) => {
           push(`./events/${original.id}`);
         }}
         buttons={[

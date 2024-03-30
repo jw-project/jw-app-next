@@ -24,12 +24,18 @@ import type { TableContextProps, TableProps, TableRefProps } from './types';
 
 const TableContext = createContext<TableContextProps<object>>({
   table: {} as ReactTableType<object>,
-  onLineAction: () => {},
+  onLineDoubleClick: () => {},
 });
 
 const TableProvider = forwardRef(
   <Data extends object>(
-    { columns, data, buttons, onLineAction }: TableProps<Data>,
+    {
+      columns,
+      data,
+      buttons,
+      onLineClick,
+      onLineDoubleClick,
+    }: TableProps<Data>,
     ref: Ref<TableRefProps<Data>>,
   ) => {
     const table = useReactTable<Data>({
@@ -46,7 +52,8 @@ const TableProvider = forwardRef(
           {
             table,
             buttons,
-            onLineAction,
+            onLineClick,
+            onLineDoubleClick,
           } as unknown as TableContextProps<object>
         }
       >

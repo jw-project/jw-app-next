@@ -51,7 +51,7 @@ const SelectedIndicatorStyled = w.div(
 );
 
 export function TableComponent<Data extends object>() {
-  const { table, onLineAction } = useTableContext<Data>();
+  const { table, onLineClick, onLineDoubleClick } = useTableContext<Data>();
 
   return (
     <TableStyled>
@@ -75,7 +75,8 @@ export function TableComponent<Data extends object>() {
         {table.getRowModel().rows.map((row) => (
           <TableRowStyled
             key={row.id}
-            onDoubleClick={() => onLineAction?.(row)}
+            onClick={() => onLineClick?.(row)}
+            onDoubleClick={() => onLineDoubleClick?.(row)}
             selected={row.getIsSelected()}
           >
             {row.getVisibleCells().map((cell) => (
