@@ -1,4 +1,5 @@
 'use client';
+'use cliente';
 
 import { useState } from 'react';
 
@@ -8,25 +9,33 @@ import type { EntityForm } from '~/components/commons/table/types';
 import { useUser } from '~/hooks/use-user';
 import { useTranslation } from '~/hooks/use-translation';
 import { useValidatePermissions } from '~/hooks/use-validate-permissions';
-// end import commons and hooks
+// end import Commons and hooks
 
-import { saveEvent } from '~/actions/congregation/events/save';
-import { eventFormSchema } from '~/actions/congregation/events/validations';
-import { eventOptions, type EventEntity } from '~/entities/event';
-
-export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
+import {
+  import type { EntityForm } from '~/components/commons/table/types';
+  informationboardOptions,
+  type InformationBoardEntity,
+  } from '~/entities/informationboard';
+  
+export const InformationBoardForm = ({
+  id,
+  data,
+  disabled,
+}: EntityForm<InformationBoardEntity>) => {
   const { permissions } = useUser();
-  const { translate } = useTranslation('routes.congregation.events.form');
-  const { canWrite } = useValidatePermissions(permissions, 'events');
+  const { translate } = useTranslation(
+    'routes.congregation.informationboard.form',
+  );
+  const { canWrite } = useValidatePermissions(permissions, 'informationboard');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
 
   return (
     <Form
       key={id}
-      schema={eventFormSchema}
+      schema={informationboardFormSchema}
       defaultValues={data}
-      serverAction={saveEvent}
+      serverAction={saveInformationBoard}
       disabled={disabled}
       onFormStatusChange={(_, values) => {
         setDateStart((c) => values.startDate || c);
@@ -40,11 +49,11 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
             name: 'type',
             label: translate('type'),
             type: 'select',
-            options: eventOptions(),
+            options: informationboardOptions(),
           },
           {
-            name: 'name',
-            label: translate('name'),
+            name: 'title',
+            label: translate('title'),
             type: 'text',
           },
           {
@@ -64,20 +73,10 @@ export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
             max: dateEnd,
           },
           {
-            name: 'startTime',
-            label: translate('start-time'),
-            type: 'time',
-          },
-          {
             name: 'endDate',
             label: translate('end-date'),
             type: 'date',
             min: dateStart,
-          },
-          {
-            name: 'endTime',
-            label: translate('end-time'),
-            type: 'time',
           },
         ],
       }}
