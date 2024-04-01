@@ -3,7 +3,6 @@ import { useTranslation as translation } from '~/hooks/use-translation';
 
 export enum InformationBoardType {
   INFORMATION = 'INFORMATION',
-  OTHER = 'OTHER',
 }
 
 export const informationboardOptions = (): SelectOptionsType[] => {

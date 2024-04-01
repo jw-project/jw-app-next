@@ -2,13 +2,11 @@
 
 import { useState } from 'react';
 
-// import Commons and hooks
 import { Form } from '~/components/commons/form/form';
 import type { EntityForm } from '~/components/commons/table/types';
 import { useUser } from '~/hooks/use-user';
 import { useTranslation } from '~/hooks/use-translation';
 import { useValidatePermissions } from '~/hooks/use-validate-permissions';
-// end import commons and hooks
 
 import { saveEvent } from '~/actions/congregation/events/save';
 import { eventFormSchema } from '~/actions/congregation/events/validations';

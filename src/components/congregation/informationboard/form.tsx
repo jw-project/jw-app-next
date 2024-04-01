@@ -1,5 +1,4 @@
 'use client';
-'use cliente';
 
 import { useState } from 'react';
 
@@ -9,14 +8,11 @@ import type { EntityForm } from '~/components/commons/table/types';
 import { useUser } from '~/hooks/use-user';
 import { useTranslation } from '~/hooks/use-translation';
 import { useValidatePermissions } from '~/hooks/use-validate-permissions';
-// end import Commons and hooks
 
-import {
-  import type { EntityForm } from '~/components/commons/table/types';
-  informationboardOptions,
-  type InformationBoardEntity,
-  } from '~/entities/informationboard';
-  
+import { saveInformationBoard } from '~/actions/congregation/informationboard/save';
+import { informationboardFormSchema } from '~/actions/congregation/informationboard/validations';
+import { informationboardOptions, type InformationBoardEntity } from '~/entities/informationboard';
+
 export const InformationBoardForm = ({
   id,
   data,

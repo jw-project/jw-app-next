@@ -1,12 +1,13 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
+
 import { BadRequestError } from "~/actions/http-responses";
 import { ValidatePermissions } from "~/actions/validate-permissions";
-
-import { InformationBoardEntity } from "~/entities/informationboard";
-import { InformationBoardCrud } from "~/services/api/congregation/informationboard/information.server";
 import { getAuthenticatedUser } from "~/services/firebase-connection.server";
+// import informationboard
+import type { InformationBoardEntity } from "~/entities/informationboard";
+import { InformationBoardCrud } from "~/services/api/congregation/informationboard/information.server";
 
 
 export async function deleteInformationBoard(informationboard: InformationBoardEntity[]) {

@@ -3,7 +3,7 @@
 import type { PropsWithChildren } from "react";
 
 import { loadInformationBoard } from "~/actions/congregation/informationboard/load";
-import { InformationBoardTable };
+import { InformationBoardTable } from "~/components/congregation/informationboard/table";
 
 export default async function InformationBoardLayout ({ children }: PropsWithChildren) {
     const { informationboard } = await loadInformationBoard();

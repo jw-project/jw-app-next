@@ -4,10 +4,11 @@ import { redirect } from "next/navigation";
 
 import { catchError } from "~/actions/http-responses";
 import { ValidatePermissions } from "~/actions/validate-permissions";
+import { getAuthenticatedUser } from "~/services/firebase-connection.server";
+// import informationboard
 import type { InformationBoardEntity} from "~/entities/informationboard";
 import { InformationBoardType } from "~/entities/informationboard";
-import { EventCrud } from "~/services/api/congregation/informationboard/information.server";
-import { getAuthenticatedUser } from "~/services/firebase-connection.server";
+import { InformationBoardCrud } from "~/services/api/congregation/informationboard/information.server";
 
 export async function loadInformationBoard(): Promise <{
     informationboard: InformationBoardEntity[];
@@ -17,7 +18,7 @@ export async function loadInformationBoard(): Promise <{
     
         new ValidatePermissions(permissions, 'informationboard').canRead();
     
-        const crud = new EventCrud(congregationId);
+        const crud = new InformationBoardCrud(congregationId);
         const informationboard = await crud.list();
     
         return { informationboard };
@@ -29,7 +30,7 @@ export async function loadInformationBoard(): Promise <{
 export async function loadInformationBoard({ id }: { id: string }): Promise<InformationBoardEntity> {
     try {
       const { congregationId, permissions } = await getAuthenticatedUser();
-      const crud = new EventCrud(congregationId);
+      const crud = new InformationBoardCrud(congregationId);
   
       new ValidatePermissions(permissions, 'informationboard').canRead();
   

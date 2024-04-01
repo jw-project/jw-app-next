@@ -18,13 +18,14 @@ import { refGuard } from '~/components/commons/utils/ref-guard';
 import { useTranslation } from '~/hooks/use-translation';
 // import InformationBoard
 import type { InformationBoardEntity } from '~/entities/informationboard';
+import { deleteInformationBoard } from '~/actions/congregation/informationboard/delete';
 
 export function InformationBoardTable({
   informationboard,
 }: {
   informationboard: InformationBoardEntity[];
 }) {
-  const tableRef = useRef<ModalRefProps>(null);
+  const tableRef = useRef<TableRefProps<InformationBoardEntity>>(null);
   const deleteModalRef = useRef<ModalRefProps>(null);
   const [informationboardState, setInformationBoardState] =
     useState<InformationBoardEntity[]>(informationboard);
@@ -144,9 +145,7 @@ export function InformationBoardTable({
           );
 
           startTransition(() => {
-            deleteInformationBoard(selectedRows).then(
-              (e) => e && toast.error(e.message),
-            );
+            deleteInformationBoard(selectedRows).then((e) => e && toast.error(e.message));
           });
           refGuard(tableRef).resetRowSelection();
         }}

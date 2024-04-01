@@ -6,13 +6,13 @@ import { BadRequestError, HttpSuccess, NotFoundError } from "~/actions/http-resp
 import type { ActionResponsePromise } from "~/actions/types";
 import { ValidatePermissions } from "~/actions/validate-permissions";
 import { validateSchema } from "~/actions/validate-schema";
+import { getAuthenticatedUser } from "~/services/firebase-connection.server";
+import { informationboardFormSchema } from "./validations";
+// imports informationboard
 import { InformationBoardEntity } from "~/entities/informationboard";
 import { InformationBoardCrud } from "~/services/api/congregation/informationboard/information.server";
-import { getAuthenticatedUser } from "~/services/firebase-connection.server";
 
-import { informationboardFormSchema } from "./validations";
-
-export async function saveInformationBorad(
+export async function saveInformationBoard(
    informationBoardReq: InformationBoardEntity,
 ): ActionResponsePromise<InformationBoardEntity> {
    try {
