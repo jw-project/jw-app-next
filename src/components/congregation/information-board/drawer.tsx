@@ -6,14 +6,14 @@ import { Drawer } from '~/components/commons/drawer';
 import type { DrawerRefProps } from '~/components/commons/drawer/types';
 import { InformationBoardForm } from './form';
 
-import type { InformationBoardEntity } from '~/entities/informationboard';
+import type { InformationBoardEntity } from '~/entities/information-board';
 
 export default function InformationBoardDrawer({
-  informationboard,
-  informationboardId,
+  informationBoard,
+  informationBoardId,
 }: PropsWithChildren<{
-  informationboard: InformationBoardEntity;
-  informationboardId: string;
+  informationBoard: InformationBoardEntity;
+  informationBoardId: string;
 }>) {
   const formDrawerRef = useRef<DrawerRefProps>(null);
   const { push } = useRouter();
@@ -25,12 +25,12 @@ export default function InformationBoardDrawer({
   }, []);
 
   const onClose = () => {
-    push('../informationboards');
+    push('../informationBoards');
   };
 
   return (
     <Drawer size="large" ref={formDrawerRef} onClose={onClose}>
-      <InformationBoardForm id={informationboardId} data={informationboard} />
+      <InformationBoardForm id={informationBoardId} data={informationBoard} />
     </Drawer>
   );
 }

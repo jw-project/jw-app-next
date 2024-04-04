@@ -5,8 +5,8 @@ export enum InformationBoardType {
   INFORMATION = 'INFORMATION',
 }
 
-export const informationboardOptions = (): SelectOptionsType[] => {
-  const { translate } = translation('enum.informationboard-type');
+export const informationBoardOptions = (): SelectOptionsType[] => {
+  const { translate } = translation('enum.informationBoard-type');
 
   return Object.values(InformationBoardType).map((day) => ({
     label: translate(day).toString(),

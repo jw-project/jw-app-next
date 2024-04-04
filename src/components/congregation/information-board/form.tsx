@@ -9,9 +9,9 @@ import { useUser } from '~/hooks/use-user';
 import { useTranslation } from '~/hooks/use-translation';
 import { useValidatePermissions } from '~/hooks/use-validate-permissions';
 
-import { saveInformationBoard } from '~/actions/congregation/informationboard/save';
-import { informationboardFormSchema } from '~/actions/congregation/informationboard/validations';
-import { informationboardOptions, type InformationBoardEntity } from '~/entities/informationboard';
+import { saveInformationBoard } from '~/actions/congregation/information-board/save';
+import { informationBoardFormSchema } from '~/actions/congregation/information-board/validations';
+import { informationBoardOptions, type InformationBoardEntity } from '~/entities/information-board';
 
 export const InformationBoardForm = ({
   id,
@@ -20,16 +20,16 @@ export const InformationBoardForm = ({
 }: EntityForm<InformationBoardEntity>) => {
   const { permissions } = useUser();
   const { translate } = useTranslation(
-    'routes.congregation.informationboard.form',
+    'routes.congregation.informationBoard.form',
   );
-  const { canWrite } = useValidatePermissions(permissions, 'informationboard');
+  const { canWrite } = useValidatePermissions(permissions, 'informationBoard');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
 
   return (
     <Form
       key={id}
-      schema={informationboardFormSchema}
+      schema={informationBoardFormSchema}
       defaultValues={data}
       serverAction={saveInformationBoard}
       disabled={disabled}
@@ -45,7 +45,7 @@ export const InformationBoardForm = ({
             name: 'type',
             label: translate('type'),
             type: 'select',
-            options: informationboardOptions(),
+            options: informationBoardOptions(),
           },
           {
             name: 'title',
