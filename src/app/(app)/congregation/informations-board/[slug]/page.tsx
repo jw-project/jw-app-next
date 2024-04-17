@@ -1,7 +1,7 @@
 'use server';
 
-import { loadInformationBoard } from '~/actions/congregation/information-board/load';
-import InformationBoardDrawer from '~/components/congregation/information-board/drawer';
+import { loadInformationBoard } from '~/actions/congregation/informations-board/load';
+import InformationBoardDrawer from '~/components/congregation/informations-board/drawer';
 
 export default async function EditInformationBoardPage({
   params,

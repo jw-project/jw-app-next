@@ -10,9 +10,8 @@ import {
 import type { ActionResponsePromise } from '~/actions/types';
 import { ValidatePermissions } from '~/actions/validate-permissions';
 import { validateSchema } from '~/actions/validate-schema';
-// imports informationBoard
 import type { InformationBoardEntity } from '~/entities/information-board';
-import { InformationBoardCrud } from '~/services/api/congregation/information-board/information.server';
+import { InformationBoardCrud } from '~/services/api/congregation/information-board/information-board.server';
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
 import { informationBoardFormSchema } from './validations';
@@ -25,7 +24,7 @@ export async function saveInformationBoard(
 
     validateSchema(informationBoardFormSchema, informationBoardReq);
 
-    new ValidatePermissions(permissions, 'informationBoard').canWrite();
+    new ValidatePermissions(permissions, 'informationsBoard').canWrite();
 
     if (!informationBoardReq.id) {
       throw new NotFoundError();
@@ -44,6 +43,6 @@ export async function saveInformationBoard(
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
   } finally {
-    revalidatePath('/(app)/congregation/informationBoard');
+    revalidatePath('/(app)/congregation/informationsBoard');
   }
 }

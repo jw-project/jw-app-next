@@ -4,26 +4,25 @@ import { revalidatePath } from 'next/cache';
 
 import { BadRequestError } from '~/actions/http-responses';
 import { ValidatePermissions } from '~/actions/validate-permissions';
-// import informationBoard
 import type { InformationBoardEntity } from '~/entities/information-board';
-import { InformationBoardCrud } from '~/services/api/congregation/information-board/information.server';
+import { InformationBoardCrud } from '~/services/api/congregation/information-board/information-board.server';
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
-export async function deleteInformationBoard(
-  informationBoard: InformationBoardEntity[],
+export async function deleteInformationsBoard(
+  informationsBoard: InformationBoardEntity[],
 ) {
   try {
     const { congregationId, permissions } = await getAuthenticatedUser();
 
-    new ValidatePermissions(permissions, 'informationBoard').canRead();
+    new ValidatePermissions(permissions, 'informationsBoard').canRead();
 
     const crud = new InformationBoardCrud(congregationId);
-    await Promise.all(informationBoard.map(({ id }) => crud.delete({ id })));
+    await Promise.all(informationsBoard.map(({ id }) => crud.delete({ id })));
 
     return null;
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
   } finally {
-    revalidatePath('/(app)/congregation/informationBoard');
+    revalidatePath('/(app)/congregation/informationsBoard');
   }
 }

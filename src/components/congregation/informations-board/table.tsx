@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import type { CoreOptions } from '@tanstack/react-table';
 import toast from 'react-hot-toast';
 
-import { deleteInformationBoard } from '~/actions/congregation/information-board/delete';
+import { deleteInformationsBoard } from '~/actions/congregation/informations-board/delete';
 //import commons and hooks
 import { AlignRight } from '~/components/align';
 import { Modal } from '~/components/commons/modal';
@@ -23,21 +23,21 @@ import { refGuard } from '~/components/commons/utils/ref-guard';
 import type { InformationBoardEntity } from '~/entities/information-board';
 import { useTranslation } from '~/hooks/use-translation';
 
-export function InformationBoardTable({
-  informationBoard,
+export function InformationsBoardTable({
+  informationsBoard,
 }: {
-  informationBoard: InformationBoardEntity[];
+  informationsBoard: InformationBoardEntity[];
 }) {
   const tableRef = useRef<TableRefProps<InformationBoardEntity>>(null);
   const deleteModalRef = useRef<ModalRefProps>(null);
-  const [informationBoardState, setInformationBoardState] =
-    useState<InformationBoardEntity[]>(informationBoard);
+  const [informationsBoardState, setInformationsBoardState] =
+    useState<InformationBoardEntity[]>(informationsBoard);
   const { translate } = useTranslation();
   const { push } = useRouter();
 
   useEffect(() => {
-    setInformationBoardState(informationBoard);
-  }, [informationBoard]);
+    setInformationsBoardState(informationsBoard);
+  }, [informationsBoard]);
 
   const columns: CoreOptions<InformationBoardEntity>['columns'] = [
     ...selectorForTable<InformationBoardEntity>(),
@@ -45,7 +45,7 @@ export function InformationBoardTable({
       id: 'title',
       header: () =>
         translate(
-          'routes.congregation.informationBoard.table.informationBoard',
+          'routes.congregation.informationsBoard.table.informationBoard',
         ),
       cell: ({ row }) => {
         const { title, type } = row.original;
@@ -63,7 +63,7 @@ export function InformationBoardTable({
     {
       id: 'date',
       header: () =>
-        translate('routes.congregation.informationBoard.table.date'),
+        translate('routes.congregation.informationsBoard.table.date'),
       cell: ({ row }) => {
         const { startDate, endDate } = row.original;
 
@@ -74,7 +74,7 @@ export function InformationBoardTable({
       id: 'edit',
       header: () => (
         <AlignRight>
-          {translate('routes.congregation.informationBoard.table.actions')}
+          {translate('routes.congregation.informationsBoard.table.actions')}
         </AlignRight>
       ),
       cell: ({
@@ -83,7 +83,7 @@ export function InformationBoardTable({
         },
       }) => (
         <AlignRight>
-          <Link href={`./informationBoard/${id}`}>
+          <Link href={`./informationsBoard/${id}`}>
             {translate('common.edit')}
           </Link>
         </AlignRight>
@@ -96,9 +96,9 @@ export function InformationBoardTable({
       <Table
         ref={tableRef}
         columns={columns}
-        data={informationBoardState}
+        data={informationsBoardState}
         onLineAction={({ original }) => {
-          push(`./informationBoard/${original.id}`);
+          push(`./informationsBoard/${original.id}`);
         }}
         buttons={[
           {
@@ -107,7 +107,7 @@ export function InformationBoardTable({
             enabledWhen: 'always',
             shouldUnselect: true,
             onClick: () => {
-              push('./informationBoard/new');
+              push('./informationsBoard/new');
             },
           },
           {
@@ -115,7 +115,7 @@ export function InformationBoardTable({
             icon: 'edit',
             enabledWhen: 'onlyOneSelected',
             onClick: (data) => {
-              push(`./informationBoard/${data[0].id}`);
+              push(`./informationsBoard/${data[0].id}`);
             },
           },
           {
@@ -132,7 +132,7 @@ export function InformationBoardTable({
         ref={deleteModalRef}
         severity="question-warning"
         text={String(
-          translate('routes.congregation.informationBoard.delete-modal', {
+          translate('routes.congregation.informationsBoard.delete-modal', {
             length: Number(tableRef.current?.getSelectedRowModel().rows.length),
           }),
         )}
@@ -141,14 +141,14 @@ export function InformationBoardTable({
             ?.getSelectedRowModel()
             .rows.map((row) => row.original);
 
-          setInformationBoardState(
-            informationBoardState.filter(
+          setInformationsBoardState(
+            informationsBoardState.filter(
               (informationBoard) => !selectedRows.includes(informationBoard),
             ),
           );
 
           startTransition(() => {
-            deleteInformationBoard(selectedRows).then(
+            deleteInformationsBoard(selectedRows).then(
               (e) => e && toast.error(e.message),
             );
           });

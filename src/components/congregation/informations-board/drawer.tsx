@@ -2,11 +2,12 @@
 
 import { useEffect, useRef, type PropsWithChildren } from 'react';
 import { useRouter } from 'next/navigation';
+
 import { Drawer } from '~/components/commons/drawer';
 import type { DrawerRefProps } from '~/components/commons/drawer/types';
-import { InformationBoardForm } from './form';
-
 import type { InformationBoardEntity } from '~/entities/information-board';
+
+import { InformationBoardForm } from './form';
 
 export default function InformationBoardDrawer({
   informationBoard,

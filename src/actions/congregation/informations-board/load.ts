@@ -4,26 +4,25 @@ import { redirect } from 'next/navigation';
 
 import { catchError } from '~/actions/http-responses';
 import { ValidatePermissions } from '~/actions/validate-permissions';
-// import informationBoard
 import {
   InformationBoardType,
   type InformationBoardEntity,
 } from '~/entities/information-board';
-import { InformationBoardCrud } from '~/services/api/congregation/information-board/information.server';
+import { InformationBoardCrud } from '~/services/api/congregation/information-board/information-board.server';
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
 export async function loadInformationsBoard(): Promise<{
-  informationBoard: InformationBoardEntity[];
+  informationsBoard: InformationBoardEntity[];
 }> {
   try {
     const { congregationId, permissions } = await getAuthenticatedUser();
 
-    new ValidatePermissions(permissions, 'informationBoard').canRead();
+    new ValidatePermissions(permissions, 'informationsBoard').canRead();
 
     const crud = new InformationBoardCrud(congregationId);
-    const informationBoard = await crud.list();
+    const informationsBoard = await crud.list();
 
-    return { informationBoard };
+    return { informationsBoard };
   } catch (error) {
     return catchError(error);
   }
@@ -38,10 +37,10 @@ export async function loadInformationBoard({
     const { congregationId, permissions } = await getAuthenticatedUser();
     const crud = new InformationBoardCrud(congregationId);
 
-    new ValidatePermissions(permissions, 'informationBoard').canRead();
+    new ValidatePermissions(permissions, 'informationsBoard').canRead();
 
     if (id === 'new') {
-      redirect(`/congregation/informationBoard/${crud.getNewId()}`);
+      redirect(`/congregation/informationsBoard/${crud.getNewId()}`);
     }
 
     const informationBoard = await crud.get({ id });

@@ -2,16 +2,17 @@
 
 import { useState } from 'react';
 
-// import Commons and hooks
+import { saveInformationBoard } from '~/actions/congregation/informations-board/save';
+import { informationBoardFormSchema } from '~/actions/congregation/informations-board/validations';
 import { Form } from '~/components/commons/form/form';
 import type { EntityForm } from '~/components/commons/table/types';
-import { useUser } from '~/hooks/use-user';
+import {
+  informationBoardOptions,
+  type InformationBoardEntity,
+} from '~/entities/information-board';
 import { useTranslation } from '~/hooks/use-translation';
+import { useUser } from '~/hooks/use-user';
 import { useValidatePermissions } from '~/hooks/use-validate-permissions';
-
-import { saveInformationBoard } from '~/actions/congregation/information-board/save';
-import { informationBoardFormSchema } from '~/actions/congregation/information-board/validations';
-import { informationBoardOptions, type InformationBoardEntity } from '~/entities/information-board';
 
 export const InformationBoardForm = ({
   id,
