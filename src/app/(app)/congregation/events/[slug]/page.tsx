@@ -1,7 +1,7 @@
 'use server';
 
 import { loadEvent } from '~/actions/congregation/events/load';
-import EventDrawer from '~/components/congregation/events/drawer';
+import { EventForm } from '~/components/congregation/events/form';
 
 export default async function EditEventPage({
   params,
@@ -10,5 +10,5 @@ export default async function EditEventPage({
 }) {
   const event = await loadEvent({ id: params.slug });
 
-  return <EventDrawer event={event} eventId={params.slug} />;
+  return <EventForm data={event} id={params.slug} />;
 }

@@ -8,7 +8,7 @@ import { weekOptions } from '~/entities/week';
 import { useTranslation } from '~/hooks/use-translation';
 import { useUser } from '~/hooks/use-user';
 
-export default function CongregationForm({
+export function CongregationForm({
   congregation,
 }: {
   congregation: CongregationEntity;
