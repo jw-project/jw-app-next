@@ -22,3 +22,16 @@ export type PublisherEntity = {
   theme: Theme;
   language: string;
 };
+
+export type PublisherRecordsEntity = {
+  id: string;
+  year: number;
+  month: number;
+  participatedInMinistry: boolean;
+  studies?: number;
+  auxiliaryPioneer: boolean;
+  hours?: number;
+  credits?: number;
+  late: boolean;
+  notes?: string;
+};

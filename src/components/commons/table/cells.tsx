@@ -1,3 +1,10 @@
+'use client';
+
+import { log } from 'console';
+import { useEffect, useState } from 'react';
+
+import type { ColumnDef } from '@tanstack/react-table';
+
 export const TextDescriptionCell = ({
   text,
   description,
@@ -14,3 +21,28 @@ export const TextDescriptionCell = ({
     </>
   );
 };
+
+export function gridEditableColumn<T>(): Partial<ColumnDef<T>> {
+  return {
+    cell: ({ getValue, row: { index }, column: { id }, table }) => {
+      const initialValue = getValue();
+      const [value, setValue] = useState(initialValue);
+
+      const onChange = (e: string) => {
+        setValue(e);
+      };
+
+      useEffect(() => {
+        setValue(initialValue);
+      }, [initialValue]);
+
+      return (
+        <input
+          value={value as string}
+          onChange={(e) => onChange(e.target.value)}
+          onFocus={(e) => e.target.select()}
+        />
+      );
+    },
+  };
+}

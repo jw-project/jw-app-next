@@ -9,7 +9,7 @@ import { PublisherCrud } from '~/services/api/publishers/publishers.server';
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
 export async function loadPublishers(): Promise<{
-  publishers: PublisherEntity[];
+  publishers: Array<PublisherEntity>;
 }> {
   try {
     const { congregationId, permissions } = await getAuthenticatedUser();

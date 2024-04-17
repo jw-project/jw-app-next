@@ -9,6 +9,7 @@ import { EventsTable } from '~/components/congregation/events/table';
 
 export default async function EventLayout({ children }: PropsWithChildren) {
   const { events } = await loadEvents();
+  debugger;
 
   return (
     <EventPageProvider events={events}>
