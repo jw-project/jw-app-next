@@ -26,7 +26,8 @@ export type ExtraButtonGroupProps<Data extends object> = {
 
 export type TableContextProps<Data extends object> = {
   table: ReactTableType<Data>;
-  onLineAction?: (data: Row<Data>) => void;
+  onLineDoubleClick?: (data: Row<Data>) => void;
+  onLineClick?: (data: Row<Data>) => void;
   buttons?: Array<ClearedButtonGroupProps & ExtraButtonGroupProps<Data>>;
 };
 
@@ -38,5 +39,6 @@ export type TableProps<Data extends object> = {
   columns: ColumnDef<Data, any>[];
   data: Data[];
   buttons?: Array<ClearedButtonGroupProps & ExtraButtonGroupProps<Data>>;
-  onLineAction?: (data: Row<Data>) => void;
+  onLineDoubleClick?: (data: Row<Data>) => void;
+  onLineClick?: (data: Row<Data>) => void;
 };

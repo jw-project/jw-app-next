@@ -19,7 +19,10 @@ import { refGuard } from '~/components/commons/utils/ref-guard';
 import type { EventEntity } from '~/entities/event';
 import { useTranslation } from '~/hooks/use-translation';
 
-export function EventsTable({ events }: { events: EventEntity[] }) {
+import { useEventPage } from './context';
+
+export function EventsTable() {
+  const { events } = useEventPage();
   const tableRef = useRef<TableRefProps<EventEntity>>(null);
   const deleteModalRef = useRef<ModalRefProps>(null);
   const [eventsState, setEventsState] = useState<EventEntity[]>(events);
@@ -80,7 +83,7 @@ export function EventsTable({ events }: { events: EventEntity[] }) {
         ref={tableRef}
         columns={columns}
         data={eventsState}
-        onLineAction={({ original }) => {
+        onLineDoubleClick={({ original }) => {
           push(`./events/${original.id}`);
         }}
         buttons={[
