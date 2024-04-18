@@ -10,6 +10,7 @@ export type Permissions = {
   groups?: PermissionsEnum;
   events?: PermissionsEnum;
   publishers?: PermissionsEnum;
+  publishersRecords?: PermissionsEnum;
 };
 
 export type AllPermissions = keyof Omit<Permissions, 'admin'>;

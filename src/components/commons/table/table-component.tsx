@@ -1,57 +1,19 @@
 'use client';
 
 import { flexRender } from '@tanstack/react-table';
-import { w } from 'windstitch';
 
+import {
+  SelectedIndicatorStyled,
+  TableCellStyled,
+  TableHeadStyled,
+  TableRowStyled,
+  TableStyled,
+} from './styled';
 import { useTableContext } from './table';
 
-const TableStyled = w.table(`
-  w-full
-  text-sm
-  text-left
-  text-gray-500
-  dark:text-gray-400
-`);
-
-const TableHeadStyled = w.thead(`
-  text-xs
-  text-gray-700
-  uppercase
-  bg-gray-50
-  dark:bg-gray-700
-  dark:text-gray-400
-`);
-
-const TableRowStyled = w.tr(
-  `
-  border-b
-  dark:border-gray-700
-  relative
-`,
-  {
-    variants: {
-      selected: (selected: boolean) =>
-        selected
-          ? 'bg-gray-100 dark:bg-gray-700'
-          : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
-    },
-  },
-);
-
-const SelectedIndicatorStyled = w.div(
-  `
-  w-1
-  h-full
-  absolute
-  top-0
-  left-0
-  bg-blue-500
-  dark:bg-blue-400
-`,
-);
-
 export function TableComponent<Data extends object>() {
-  const { table, onLineClick, onLineDoubleClick } = useTableContext<Data>();
+  const { table, grid, onLineClick, onLineDoubleClick } =
+    useTableContext<Data>();
 
   return (
     <TableStyled>
@@ -80,12 +42,12 @@ export function TableComponent<Data extends object>() {
             selected={row.getIsSelected()}
           >
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className="px-6 py-4">
+              <TableCellStyled key={cell.id} grid={Boolean(grid)}>
                 {row.getIsSelected() && cell.column.getIsFirstColumn() && (
                   <SelectedIndicatorStyled />
                 )}
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+              </TableCellStyled>
             ))}
           </TableRowStyled>
         ))}

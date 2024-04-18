@@ -26,9 +26,10 @@ export type ExtraButtonGroupProps<Data extends object> = {
 
 export type TableContextProps<Data extends object> = {
   table: ReactTableType<Data>;
+  buttons?: Array<ClearedButtonGroupProps & ExtraButtonGroupProps<Data>>;
+  grid?: boolean;
   onLineDoubleClick?: (data: Row<Data>) => void;
   onLineClick?: (data: Row<Data>) => void;
-  buttons?: Array<ClearedButtonGroupProps & ExtraButtonGroupProps<Data>>;
 };
 
 export type EnabledWhen = 'onlyOneSelected' | 'leastOneSelected' | 'always';
@@ -39,6 +40,7 @@ export type TableProps<Data extends object> = {
   columns: ColumnDef<Data, any>[];
   data: Data[];
   buttons?: Array<ClearedButtonGroupProps & ExtraButtonGroupProps<Data>>;
+  grid?: boolean;
   onLineDoubleClick?: (data: Row<Data>) => void;
   onLineClick?: (data: Row<Data>) => void;
 };

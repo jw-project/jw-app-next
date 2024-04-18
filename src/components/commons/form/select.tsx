@@ -18,7 +18,10 @@ export type SelectOptionsType = {
   selected?: boolean;
 };
 
-const SelectStyled = inputBaseFactory('select', 'appearance-none opacity-100');
+export const SelectStyled = inputBaseFactory(
+  'select',
+  'appearance-none opacity-100',
+);
 
 export function Select({
   name,

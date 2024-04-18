@@ -10,7 +10,7 @@ import { NotFoundError } from '~/actions/http-responses';
 export abstract class CrudClass<Entity extends DocumentData> {
   abstract collection: CollectionReference<DocumentData, DocumentData>;
 
-  private getAllData<T>(
+  protected getAllData<T>(
     snap: QuerySnapshot<DocumentData>,
     { includeId }: { includeId: boolean } | undefined = { includeId: true },
   ) {
