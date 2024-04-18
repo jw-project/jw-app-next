@@ -11,8 +11,6 @@ import type { TableRefProps } from '~/components/commons/table/types';
 import type { PublisherRecordsEntity } from '~/entities/publisher';
 import { useTranslation } from '~/hooks/use-translation';
 
-import { usePublisherPage } from '../context';
-
 export function RecordsGrid({
   yearOptions,
   records,
@@ -47,7 +45,6 @@ export function RecordsGrid({
       id: 'month',
       accessorKey: 'month',
       header: () => translate('surname'),
-      // cell: ({ row }) => 'a', //row.original.surname,
     },
   ];
 

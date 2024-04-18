@@ -37,15 +37,12 @@ export async function saveEvent(
       id: eventReq.id,
     });
 
-    debugger;
-
     return new HttpSuccess(
       await crud.get({ id: eventReq.id }),
     ).toServerAction();
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
   } finally {
-    debugger;
     revalidatePath('/(app)/congregation/events', 'layout');
   }
 }

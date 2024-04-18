@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { catchError } from '~/actions/http-responses';
 import { ValidatePermissions } from '~/actions/validate-permissions';
 import type { PublisherEntity } from '~/entities/publisher';
@@ -26,22 +24,3 @@ export async function loadPublishers(): Promise<{
     return catchError(error);
   }
 }
-
-// export async function loadEvent({ id }: { id: string }): Promise<EventEntity> {
-//   try {
-//     const { congregationId, permissions } = await getAuthenticatedUser();
-//     const crud = new EventCrud(congregationId);
-
-//     new ValidatePermissions(permissions, 'events').canRead();
-
-//     if (id === 'new') {
-//       redirect(`/congregation/events/${crud.getNewId()}`);
-//     }
-
-//     const event = await crud.get({ id });
-
-//     return { ...{ type: EventType.CIRCUIT_ASSEMBLY }, ...event };
-//   } catch (error) {
-//     return catchError(error);
-//   }
-// }

@@ -1,6 +1,5 @@
 'use client';
 
-import { log } from 'console';
 import { useEffect, useState } from 'react';
 
 import type { ColumnDef } from '@tanstack/react-table';
@@ -24,7 +23,7 @@ export const TextDescriptionCell = ({
 
 export function gridEditableColumn<T>(): Partial<ColumnDef<T>> {
   return {
-    cell: ({ getValue, row: { index }, column: { id }, table }) => {
+    cell: ({ getValue }) => {
       const initialValue = getValue();
       const [value, setValue] = useState(initialValue);
 
