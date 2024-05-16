@@ -1,16 +1,13 @@
 'use client';
 
-// import react
 import { startTransition, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
-// import next
 import { useRouter } from 'next/navigation';
 
 import type { CoreOptions } from '@tanstack/react-table';
 import toast from 'react-hot-toast';
 
 import { deleteInformationsBoard } from '~/actions/congregation/informations-board/delete';
-//import commons and hooks
 import { AlignRight } from '~/components/align';
 import { Modal } from '~/components/commons/modal';
 import type { ModalRefProps } from '~/components/commons/modal/types';
@@ -19,15 +16,13 @@ import { Table } from '~/components/commons/table/table';
 import type { TableRefProps } from '~/components/commons/table/types';
 import { DateCell, selectorForTable } from '~/components/commons/table/utils';
 import { refGuard } from '~/components/commons/utils/ref-guard';
-// import InformationBoard
 import type { InformationBoardEntity } from '~/entities/information-board';
 import { useTranslation } from '~/hooks/use-translation';
 
-export function InformationsBoardTable({
-  informationsBoard,
-}: {
-  informationsBoard: InformationBoardEntity[];
-}) {
+import { useInformationBoardPage } from './context';
+
+export function InformationsBoardTable() {
+  const { informationsBoard } = useInformationBoardPage();
   const tableRef = useRef<TableRefProps<InformationBoardEntity>>(null);
   const deleteModalRef = useRef<ModalRefProps>(null);
   const [informationsBoardState, setInformationsBoardState] =
@@ -83,7 +78,7 @@ export function InformationsBoardTable({
         },
       }) => (
         <AlignRight>
-          <Link href={`./informationsBoard/${id}`}>
+          <Link href={`./informations-board/${id}`}>
             {translate('common.edit')}
           </Link>
         </AlignRight>
@@ -97,8 +92,8 @@ export function InformationsBoardTable({
         ref={tableRef}
         columns={columns}
         data={informationsBoardState}
-        onLineAction={({ original }) => {
-          push(`./informationsBoard/${original.id}`);
+        onLineDoubleClick={({ original }) => {
+          push(`./informations-board/${original.id}`);
         }}
         buttons={[
           {
@@ -107,7 +102,7 @@ export function InformationsBoardTable({
             enabledWhen: 'always',
             shouldUnselect: true,
             onClick: () => {
-              push('./informationsBoard/new');
+              push('./informations-board/new');
             },
           },
           {
@@ -115,7 +110,7 @@ export function InformationsBoardTable({
             icon: 'edit',
             enabledWhen: 'onlyOneSelected',
             onClick: (data) => {
-              push(`./informationsBoard/${data[0].id}`);
+              push(`./informations-board/${data[0].id}`);
             },
           },
           {

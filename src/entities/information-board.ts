@@ -2,7 +2,12 @@ import type { SelectOptionsType } from '~/components/commons/form/select';
 import { useTranslation as translation } from '~/hooks/use-translation';
 
 export enum InformationBoardType {
+  ACCOUNTS = 'ACCOUNTS',
+  DESIGNATIONS = 'DESIGNATIONS',
   INFORMATION = 'INFORMATION',
+  TERRITORY = 'TERRITORY',
+  WITNESSING = 'WITNESSING',
+  OTHERS = 'OTHERS',
 }
 
 export const informationBoardOptions = (): SelectOptionsType[] => {

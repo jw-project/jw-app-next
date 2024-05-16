@@ -1,3 +1,5 @@
-export default async function InformationBoardPage () {
-   return <></>;
+'use server';
+
+export default async function InformationBoardPage() {
+  return <></>;
 }

@@ -40,7 +40,7 @@ export async function loadInformationBoard({
     new ValidatePermissions(permissions, 'informationsBoard').canRead();
 
     if (id === 'new') {
-      redirect(`/congregation/informationsBoard/${crud.getNewId()}`);
+      redirect(`/congregation/informations-board/${crud.getNewId()}`);
     }
 
     const informationBoard = await crud.get({ id });

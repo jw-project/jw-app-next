@@ -35,7 +35,7 @@ export const informationBoardFormSchema = z
     },
     {
       message:
-        'routes.congregation.informationsBoard.form.errors.end-date-before-start-date',
+        'routes.congregation.informations-board.form.errors.end-date-before-start-date',
       path: ['endDate'],
     },
   );

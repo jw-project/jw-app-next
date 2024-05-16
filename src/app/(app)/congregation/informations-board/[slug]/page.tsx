@@ -1,7 +1,7 @@
 'use server';
 
 import { loadInformationBoard } from '~/actions/congregation/informations-board/load';
-import InformationBoardDrawer from '~/components/congregation/informations-board/drawer';
+import { InformationBoardForm } from '~/components/congregation/informations-board/form';
 
 export default async function EditInformationBoardPage({
   params,
@@ -10,10 +10,5 @@ export default async function EditInformationBoardPage({
 }) {
   const informationBoard = await loadInformationBoard({ id: params.slug });
 
-  return (
-    <InformationBoardDrawer
-      informationBoard={informationBoard}
-      informationBoardId={params.slug}
-    />
-  );
+  return <InformationBoardForm data={informationBoard} id={params.slug} />;
 }

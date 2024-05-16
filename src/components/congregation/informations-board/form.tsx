@@ -21,9 +21,9 @@ export const InformationBoardForm = ({
 }: EntityForm<InformationBoardEntity>) => {
   const { permissions } = useUser();
   const { translate } = useTranslation(
-    'routes.congregation.informationBoard.form',
+    'routes.congregation.informations-board.form',
   );
-  const { canWrite } = useValidatePermissions(permissions, 'informationBoard');
+  const { canWrite } = useValidatePermissions(permissions, 'informationsBoard');
   const [dateStart, setDateStart] = useState('');
   const [dateEnd, setDateEnd] = useState('');
 
