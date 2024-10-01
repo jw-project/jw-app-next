@@ -11,10 +11,12 @@ const config: Config = {
   theme: {
     extend: {},
   },
-  plugins: [tailwindScrollbar({ nocompatible: true })],
-  variants: {
-    scrollbar: ['rounded'],
-  },
+  plugins: [
+    tailwindScrollbar({
+      nocompatible: true,
+      preferredStrategy: 'pseudoelements',
+    }),
+  ],
 };
 
 export default config;

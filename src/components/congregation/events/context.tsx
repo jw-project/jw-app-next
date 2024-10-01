@@ -12,7 +12,7 @@ type EventPageContextType = {
   //
 };
 
-export const EventPageContext = createContext<
+const EventPageContext = createContext<
   EventPageProviderProps & EventPageContextType
 >({
   events: [],

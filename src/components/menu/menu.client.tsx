@@ -16,15 +16,11 @@ export function MenuClient({ menu }: { menu: MenuType[] }) {
   const { permissions } = useUser();
   const { showMenu, closeMenu } = useMenu();
   const menuRef = useRef<HTMLElement>(null);
-  useOutsideClick(
-    menuRef,
-    () => {
-      if (isMobile && showMenu) {
-        closeMenu();
-      }
-    },
-    [showMenu],
-  );
+  useOutsideClick(menuRef, () => {
+    if (isMobile && showMenu) {
+      closeMenu();
+    }
+  }, [showMenu]);
 
   return (
     <>

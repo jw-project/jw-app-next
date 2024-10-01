@@ -1,4 +1,9 @@
-import { loadRecords } from '~/actions/people/publishers/records/load';
+'use server';
+
+import {
+  getCurrentYearsRegister,
+  loadRecords,
+} from '~/actions/people/publishers/records/load';
 import { RecordsGrid } from '~/components/people/publishers/records/grid';
 import type { PageProps } from '~/next-types';
 
@@ -11,10 +16,7 @@ export default async function PublisherRecordsPage({
     publisherId: params.slug,
   });
 
-  return (
-    <RecordsGrid
-      records={records}
-      yearOptions={{ selected: 2024, years: [2023, 2024, 2025] }}
-    />
-  );
+  const yearsOptions = await getCurrentYearsRegister();
+
+  return <RecordsGrid records={records} yearOptions={yearsOptions} />;
 }

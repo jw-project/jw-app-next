@@ -2,13 +2,13 @@ import type { PropsWithChildren } from 'react';
 import type { Metadata } from 'next';
 import { cookies, headers } from 'next/headers';
 
-import '~/styles/global.css';
-
 import { Body } from '~/components/body/body';
 import { ThemeProvider, type Theme } from '~/global-context/theme';
 import { LanguageProvider } from '~/global-context/translation';
 import type { Translations } from '~/hooks/use-translation';
 import { getTranslateResources } from '~/services/i18n.server';
+
+import '~/styles/global.css';
 
 export const dynamic = 'force-dynamic';
 

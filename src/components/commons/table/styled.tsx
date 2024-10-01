@@ -1,12 +1,22 @@
+import Link from 'next/link';
+
 import { w } from 'windstitch';
 
-export const TableWrapperStyled = w.div(``, {
-  variants: {
-    grid: (grid: boolean) => (grid ? '' : 'shadow-md rounded-md pb-2'),
-  },
-});
+import type { TailwindCursor } from '~/styles/types';
 
-export const TableStyled = w.table(`
+export const TableWrapperStyled = w.div(
+  `
+  rounded-md
+  pb-2
+  `,
+  {
+    variants: {
+      shadow: (shadow: boolean) => (shadow ? 'shadow-md' : ''),
+    },
+  },
+);
+
+export const TableStyled = w.div(`
   w-full
   text-sm
   text-left
@@ -14,7 +24,7 @@ export const TableStyled = w.table(`
   dark:text-gray-400
 `);
 
-export const TableHeadStyled = w.thead(`
+export const TableHeadStyled = w.div(`
   text-xs
   text-gray-700
   uppercase
@@ -23,7 +33,7 @@ export const TableHeadStyled = w.thead(`
   dark:text-gray-400
 `);
 
-export const TableRowStyled = w.tr(
+export const TableRowDivStyled = w.div(
   `
   border-b
   dark:border-gray-700
@@ -31,19 +41,64 @@ export const TableRowStyled = w.tr(
 `,
   {
     variants: {
+      href: (_value: string) => '',
+      cursor: (cursor: TailwindCursor) => cursor,
       selected: (selected: boolean) =>
         selected
           ? 'bg-gray-100 dark:bg-gray-700'
           : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
     },
+    defaultVariants: {
+      href: '',
+      cursor: 'default',
+    },
   },
 );
 
-export const TableCellStyled = w.td(``, {
+export const TableRowLinkStyled = w(Link, {
+  className: `
+  border-b
+  dark:border-gray-700
+  relative
+`,
   variants: {
-    grid: (grid: boolean) => (grid ? 'p-2' : 'px-6 py-4'),
+    cursor: (cursor: TailwindCursor) => cursor,
+    selected: (selected: boolean) =>
+      selected
+        ? 'bg-gray-100 dark:bg-gray-700'
+        : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
+  },
+  defaultVariants: {
+    cursor: 'default',
   },
 });
+
+export const TableCellStyled = w.div(
+  `
+  px-6
+  py-4`,
+  {
+    variants: {
+      flex: (flex: boolean) => (flex ? 'flex-1' : ''),
+    },
+  },
+);
+
+export const TableHeadCellStyled = w.div(
+  `
+  flex
+  items-center
+  gap-2
+  px-6
+  py-3
+  font-bold
+`,
+  {
+    variants: {
+      flex: (flex: boolean) => (flex ? 'flex-1' : ''),
+    },
+  },
+);
 
 export const SelectedIndicatorStyled = w.div(
   `

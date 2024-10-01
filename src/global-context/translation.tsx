@@ -18,7 +18,7 @@ type TranslationContextType = {
   setDefaultLanguage: Dispatch<SetStateAction<string>>;
 };
 
-export const TranslationContext = createContext<TranslationContextType>(
+const TranslationContext = createContext<TranslationContextType>(
   {} as TranslationContextType,
 );
 

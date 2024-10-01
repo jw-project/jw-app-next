@@ -6,6 +6,8 @@ import type { PublisherRecordsEntity } from '~/entities/publisher';
 import { PublisherRecordsCrud } from '~/services/api/publishers/publishers-records.server';
 import { getAuthenticatedUser } from '~/services/firebase-connection.server';
 
+import { recordDefaultValues } from './consts';
+
 const getParamYear = (year?: string | Array<string>) => {
   const paramYear = typeof year === 'string' ? year : undefined;
 
@@ -29,14 +31,7 @@ const completeData = (
 
     return (
       record ||
-      ({
-        id: '',
-        year: month > 8 ? year - 1 : year,
-        month,
-        participatedInMinistry: false,
-        auxiliaryPioneer: false,
-        late: false,
-      } satisfies PublisherRecordsEntity)
+      recordDefaultValues({ year: month > 8 ? year - 1 : year, month })
     );
   });
 };
@@ -63,4 +58,13 @@ export async function loadRecords({
   } catch (error) {
     return catchError(error);
   }
+}
+
+export async function getCurrentYearsRegister() {
+  const currentYear = new Date().getFullYear();
+
+  return {
+    selected: currentYear,
+    years: [currentYear - 1, currentYear, currentYear + 1],
+  };
 }

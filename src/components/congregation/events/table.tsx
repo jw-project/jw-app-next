@@ -74,6 +74,7 @@ export function EventsTable() {
           <Link href={`./events/${id}`}>{translate('common.edit')}</Link>
         </AlignRight>
       ),
+      size: 100,
     },
   ];
 
@@ -85,6 +86,9 @@ export function EventsTable() {
         data={eventsState}
         onLineDoubleClick={({ original }) => {
           push(`./events/${original.id}`);
+        }}
+        options={{
+          minSize: 500,
         }}
         buttons={[
           {

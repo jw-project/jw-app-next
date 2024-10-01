@@ -27,11 +27,11 @@ export type PublisherRecordsEntity = {
   id: string;
   year: number;
   month: number;
-  participatedInMinistry: boolean;
+  shared: boolean;
   studies?: number;
   auxiliaryPioneer: boolean;
   hours?: number;
   credits?: number;
   late: boolean;
-  notes?: string;
+  remarks?: string;
 };

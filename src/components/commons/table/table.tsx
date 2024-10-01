@@ -13,12 +13,12 @@ import {
 
 import {
   getCoreRowModel,
+  getSortedRowModel,
   useReactTable,
   type Table as ReactTableType,
 } from '@tanstack/react-table';
 
 import { EmptyState } from '../empty-state';
-import { gridEditableColumn } from './cells';
 import { TableWrapperStyled } from './styled';
 import { TableButtonGroup } from './table-button-group';
 import { TableComponent } from './table-component';
@@ -35,7 +35,8 @@ const TableProvider = forwardRef(
       columns,
       data,
       buttons,
-      grid,
+      options,
+      lineAsLink,
       onLineClick,
       onLineDoubleClick,
     }: TableProps<Data>,
@@ -44,8 +45,12 @@ const TableProvider = forwardRef(
     const table = useReactTable<Data>({
       data,
       columns,
-      defaultColumn: grid ? gridEditableColumn() : undefined,
       getCoreRowModel: getCoreRowModel(),
+      getSortedRowModel: getSortedRowModel(),
+      defaultColumn: {
+        size: 0,
+        minSize: 0,
+      },
     });
 
     useImperativeHandle(ref, () => table, [table]);
@@ -56,7 +61,8 @@ const TableProvider = forwardRef(
           {
             table,
             buttons,
-            grid,
+            options,
+            lineAsLink,
             onLineClick,
             onLineDoubleClick,
           } as unknown as TableContextProps<object>
@@ -64,7 +70,10 @@ const TableProvider = forwardRef(
       >
         {!Boolean(data.length) && <EmptyState />}
         {Boolean(data.length) && (
-          <TableWrapperStyled grid={Boolean(grid)}>
+          <TableWrapperStyled
+            shadow={options?.hasShadow === undefined || options.hasShadow}
+            style={{ minWidth: `${options?.minSize}px` }}
+          >
             <TableButtonGroup />
             <TableComponent />
           </TableWrapperStyled>
