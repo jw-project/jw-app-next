@@ -3,6 +3,7 @@
 import {
   createContext,
   startTransition,
+  useEffect,
   useMemo,
   useState,
   type PropsWithChildren,
@@ -139,6 +140,20 @@ export const SavingProvider = ({ children }: PropsWithChildren) => {
     );
   const addErrorsApi = (obj: ErrorsApiListType) =>
     setErrorsList((current) => [...current, obj]);
+
+  function onBeforeUnload(e: BeforeUnloadEvent) {
+    e.preventDefault();
+  }
+
+  useEffect(() => {
+    if (isSaving) {
+      window.addEventListener('beforeunload', onBeforeUnload);
+    }
+
+    return () => {
+      window.removeEventListener('beforeunload', onBeforeUnload);
+    };
+  }, [isSaving]);
 
   return (
     <SavingContext.Provider

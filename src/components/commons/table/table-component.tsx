@@ -1,111 +1,96 @@
 'use client';
 
 import { flexRender } from '@tanstack/react-table';
-import { w } from 'windstitch';
 
+import {
+  SelectedIndicatorStyled,
+  TableCellStyled,
+  TableHeadCellStyled,
+  TableHeadStyled,
+  TableRowDivStyled,
+  TableRowLinkStyled,
+  TableStyled,
+} from './styled';
 import { useTableContext } from './table';
-
-const TableStyled = w.table(`
-  w-full
-  text-sm
-  text-left
-  text-gray-500
-  dark:text-gray-400
-`);
-
-const TableHeadStyled = w.thead(`
-  text-xs
-  text-gray-700
-  uppercase
-  bg-gray-50
-  dark:bg-gray-700
-  dark:text-gray-400
-`);
-
-const TableRowStyled = w.tr(
-  `
-  border-b
-  dark:border-gray-700
-  relative
-`,
-  {
-    variants: {
-      selected: (selected: boolean) =>
-        selected
-          ? 'bg-gray-100 dark:bg-gray-700'
-          : 'bg-white hover:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-600',
-    },
-  },
-);
-
-const SelectedIndicatorStyled = w.div(
-  `
-  w-1
-  h-full
-  absolute
-  top-0
-  left-0
-  bg-blue-500
-  dark:bg-blue-400
-`,
-);
+import { SortArrows } from './utils';
 
 export function TableComponent<Data extends object>() {
-  const { table, onLineClick, onLineDoubleClick } = useTableContext<Data>();
+  const { table, options, lineAsLink, onLineClick, onLineDoubleClick } =
+    useTableContext<Data>();
+  const TableRow = lineAsLink ? TableRowLinkStyled : TableRowDivStyled;
 
   return (
     <TableStyled>
       <TableHeadStyled>
         {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
+          <div key={headerGroup.id} className="flex justify-between">
             {headerGroup.headers.map((header) => (
-              <th key={header.id} className="px-6 py-3">
-                {header.isPlaceholder
-                  ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext(),
-                    )}
-              </th>
+              <TableHeadCellStyled
+                key={header.id}
+                flex={!header.column.getSize()}
+                style={{
+                  width: header.column.getSize(),
+                }}
+                onClick={header.column.getToggleSortingHandler()}
+              >
+                <div>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </div>
+                <SortArrows sortDirection={header.column.getIsSorted()} />
+              </TableHeadCellStyled>
             ))}
-          </tr>
+          </div>
         ))}
       </TableHeadStyled>
-      <tbody>
+      <div>
         {table.getRowModel().rows.map((row) => (
-          <TableRowStyled
+          <TableRow
             key={row.id}
             onClick={() => onLineClick?.(row)}
             onDoubleClick={() => onLineDoubleClick?.(row)}
             selected={row.getIsSelected()}
+            cursor={options?.cursor}
+            href={String(lineAsLink?.(row))}
+            className="flex justify-between"
           >
             {row.getVisibleCells().map((cell) => (
-              <td key={cell.id} className="px-6 py-4">
+              <TableCellStyled
+                key={cell.id}
+                flex={!cell.column.getSize()}
+                style={{
+                  width: cell.column.getSize(),
+                }}
+              >
                 {row.getIsSelected() && cell.column.getIsFirstColumn() && (
                   <SelectedIndicatorStyled />
                 )}
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
-              </td>
+              </TableCellStyled>
             ))}
-          </TableRowStyled>
+          </TableRow>
         ))}
-      </tbody>
-      <tfoot className="min-h-[6px]">
+      </div>
+      <div className="min-h-[6px]">
         {table.getFooterGroups().map((footerGroup) => (
-          <tr key={footerGroup.id}>
+          <div key={footerGroup.id}>
             {footerGroup.headers.map((header) => (
-              <th key={header.id}>
+              <div key={header.id}>
                 {header.isPlaceholder
                   ? null
                   : flexRender(
                       header.column.columnDef.footer,
                       header.getContext(),
                     )}
-              </th>
+              </div>
             ))}
-          </tr>
+          </div>
         ))}
-      </tfoot>
+      </div>
     </TableStyled>
   );
 }

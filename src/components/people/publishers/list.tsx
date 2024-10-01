@@ -1,7 +1,6 @@
 'use client';
 
 import { useRef } from 'react';
-import Link from 'next/link';
 
 import type { CoreOptions } from '@tanstack/react-table';
 
@@ -10,7 +9,6 @@ import { Card } from '~/components/commons/card';
 import { Icon } from '~/components/commons/icon';
 import { Table } from '~/components/commons/table/table';
 import type { TableRefProps } from '~/components/commons/table/types';
-import { selectorForTable } from '~/components/commons/table/utils';
 import { PublisherTabsEnum, type PublisherEntity } from '~/entities/publisher';
 import { useTranslation } from '~/hooks/use-translation';
 
@@ -22,43 +20,47 @@ export function PublisherList() {
   const tableRef = useRef<TableRefProps<PublisherEntity>>(null);
 
   const columns: CoreOptions<PublisherEntity>['columns'] = [
-    ...selectorForTable<PublisherEntity>(),
     {
       id: 'name',
       header: () => translate('name'),
       cell: ({ row }) => row.original.name,
+      sortingFn: 'alphanumeric',
+      accessorKey: 'name',
     },
     {
       id: 'surname',
       header: () => translate('surname'),
       cell: ({ row }) => row.original.surname,
+      sortingFn: 'alphanumeric',
+      accessorKey: 'name',
     },
     {
-      id: 'edit',
-      header: () => <AlignRight>{translate('action')}</AlignRight>,
-      cell: ({
-        row: {
-          original: { id },
-        },
-      }) => (
+      id: 'description',
+      header: () => '',
+      cell: () => (
         <AlignRight>
-          <Link
-            href={`/people/publishers/${id}/${tabSelected || PublisherTabsEnum.Information}`}
-          >
-            <Icon
-              icon="navigate_next"
-              size="icon-large"
-              className="dark:text-white"
-            />
-          </Link>
+          <Icon icon="action_key" />
         </AlignRight>
       ),
     },
   ];
 
   return (
-    <Card padded={0} className="col-span-1">
-      <Table ref={tableRef} columns={columns} data={publishers} />
+    <Card
+      padded={0}
+      className="2xl:col-span-3 xl:col-span-4 lg:col-span-5 hidden lg:block overflow-y-auto card-full-height"
+    >
+      <Table
+        ref={tableRef}
+        columns={columns}
+        data={publishers}
+        lineAsLink={(row) =>
+          `/people/publishers/${row.original.id}/${tabSelected || PublisherTabsEnum.Information}`
+        }
+        options={{
+          hasShadow: false,
+        }}
+      />
     </Card>
   );
 }

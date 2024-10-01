@@ -1,3 +1,3 @@
 {
-  "ignore": "route.tsx|root.tsx|tailwind.config.ts|entry.server.tsx"
+  "ignore": "page.tsx|page.ts|layout.ts|next.config.mjs|tailwind.config.ts|instrumentation.ts|middleware.ts|not-found.tsx|error.tsx"
 }

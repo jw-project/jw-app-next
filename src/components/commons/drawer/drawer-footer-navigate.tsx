@@ -7,13 +7,13 @@ import { useTranslation } from '~/hooks/use-translation';
 
 import { Button } from '../button';
 
-export type DrawerFooterGenericExtends = Array<
+type DrawerFooterGenericExtends = Array<
   {
     id: string;
   } & object
 >;
 
-export type DrawerFooterProps<T extends DrawerFooterGenericExtends> = {
+type DrawerFooterProps<T extends DrawerFooterGenericExtends> = {
   navigatorData: T;
   paramKey: string;
   baseUrl: string;

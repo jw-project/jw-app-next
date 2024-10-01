@@ -3521,6 +3521,8 @@ export type IconProps = {
   className?: string;
   icon: IconOpts;
   size?:
+    | 'icon-xxx-small'
+    | 'icon-xx-small'
     | 'icon-x-small'
     | 'icon-small'
     | 'icon-medium'

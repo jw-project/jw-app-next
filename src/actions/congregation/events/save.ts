@@ -43,6 +43,6 @@ export async function saveEvent(
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
   } finally {
-    revalidatePath('/(app)/congregation/events');
+    revalidatePath('/(app)/congregation/events', 'layout');
   }
 }
