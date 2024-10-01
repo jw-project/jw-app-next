@@ -10,12 +10,23 @@ export const TabsWrapper = w.div(`
     h-full
 `);
 
-export const TabsCard = w.ul(`
+export const TabsCard = w.ul(
+  `
     rounded-b-lg
     bg-white
     shadow
-    p-4
-`);
+    overflow-y-auto
+    scrollbar-thin
+    scrollbar-thumb-rounded-full
+    scrollbar-thumb-slate-300
+    scrollbar-track-slate-50
+`,
+  {
+    variants: {
+      'omit-padding': (omitPadding: boolean) => (omitPadding ? 'p-0' : 'p-4'),
+    },
+  },
+);
 
 export const TabsStyled = w.ul(`
     flex
@@ -24,6 +35,7 @@ export const TabsStyled = w.ul(`
     text-center
     text-gray-500
     overflow-x-auto
+    overflow-y-hidden
     rounded-t-lg
     bg-gray-100
     shadow
@@ -31,7 +43,7 @@ export const TabsStyled = w.ul(`
     scrollbar-h-[2px]
     scrollbar-thumb-rounded-full
     scrollbar-thumb-slate-300
-    scrollbar-track-white
+    scrollbar-track-slate-50
 `);
 
 export const TabStyled = w.li(`

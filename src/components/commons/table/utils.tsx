@@ -1,8 +1,9 @@
-import type { CoreOptions } from '@tanstack/react-table';
+import type { CoreOptions, SortDirection } from '@tanstack/react-table';
 
 import { useContextTranslation } from '~/global-context/translation';
 import { useTranslation } from '~/hooks/use-translation';
 
+import { Icon } from '../icon';
 import { IndeterminateCheckbox } from './checkbox';
 
 export function selectorForTable<Data>(): CoreOptions<Data>['columns'] {
@@ -28,6 +29,7 @@ export function selectorForTable<Data>(): CoreOptions<Data>['columns'] {
           }}
         />
       ),
+      size: 65,
     },
   ];
 }
@@ -54,3 +56,18 @@ export function DateCell({
 
   return new Date(startDate).toLocaleDateString(defaultLanguage);
 }
+
+export const SortArrows = ({
+  sortDirection,
+}: {
+  sortDirection: false | SortDirection;
+}) => {
+  if (!sortDirection) {
+    return null;
+  }
+
+  return {
+    asc: <Icon icon="keyboard_arrow_down" size="icon-xxx-small" />,
+    desc: <Icon icon="keyboard_arrow_up" size="icon-xxx-small" />,
+  }[sortDirection];
+};

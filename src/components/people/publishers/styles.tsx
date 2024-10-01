@@ -4,6 +4,6 @@ export const PublisherWrapper = w.div(
   `
     grid
     gap-4
-    grid-cols-3
+    grid-cols-12
     `,
 );

@@ -20,7 +20,7 @@ type PublishersPageContextType = {
   tabsDisabled: boolean;
 };
 
-export const PublishersPageContext = createContext<
+const PublishersPageContext = createContext<
   PublishersPageProviderProps & PublishersPageContextType
 >({} as PublishersPageProviderProps & PublishersPageContextType);
 

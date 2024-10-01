@@ -28,6 +28,8 @@ export function useHorizontalScroll<Element extends HTMLElement>() {
         }
       };
     }
+
+    return () => {};
   }, []);
 
   return elRef;

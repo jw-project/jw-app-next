@@ -14,7 +14,7 @@ export function PublisherTabs({ children }: PropsWithChildren) {
   const { tabSelected, tabsDisabled } = usePublisherPage();
 
   return (
-    <TabsWrapper className="col-span-2">
+    <TabsWrapper className="2xl:col-span-9 xl:col-span-8 lg:col-span-7 col-span-12 card-full-height">
       <Tabs>
         <Tab
           selected={tabSelected === PublisherTabsEnum.Information}
@@ -47,7 +47,14 @@ export function PublisherTabs({ children }: PropsWithChildren) {
           disabled={tabsDisabled}
         />
       </Tabs>
-      <TabsCard>{children}</TabsCard>
+      <TabsCard
+        omit-padding={Boolean(
+          tabSelected && [PublisherTabsEnum.Records].includes(tabSelected),
+        )}
+        className="h-full"
+      >
+        {children}
+      </TabsCard>
     </TabsWrapper>
   );
 }

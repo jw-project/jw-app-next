@@ -1,10 +1,10 @@
-import { type JSX, type PropsWithChildren, type RefObject } from 'react';
+import { type JSX, type PropsWithChildren } from 'react';
 
 import type { W } from 'windstitch';
 
 import type { DrawerWrapperStyled } from './styled';
 
-export type DrawerWrapperStyledType = W.Infer<typeof DrawerWrapperStyled>;
+type DrawerWrapperStyledType = W.Infer<typeof DrawerWrapperStyled>;
 
 export type DrawerProps = PropsWithChildren<{
   size?: DrawerWrapperStyledType['size'];
@@ -21,8 +21,4 @@ export type DrawerContextProps = PropsWithChildren<{
 export type DrawerRefProps = {
   isOpen: boolean;
   openDrawer: () => void;
-};
-
-export type DrawerOutletContext = {
-  formDrawerRef: RefObject<DrawerRefProps>;
 };

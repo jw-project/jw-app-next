@@ -59,15 +59,11 @@ export const Drawer = forwardRef(
       setTimeout(onClose, 150);
     };
 
-    useOutsideClick(
-      drawerRef,
-      () => {
-        if (drawerIsOpen) {
-          closeDrawer();
-        }
-      },
-      [drawerIsOpen],
-    );
+    useOutsideClick(drawerRef, () => {
+      if (drawerIsOpen) {
+        closeDrawer();
+      }
+    }, [drawerIsOpen]);
 
     useEffect(() => {
       if (drawerIsOpen) {

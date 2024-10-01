@@ -1,0 +1,8 @@
+.ag-root * {
+  @apply scrollbar scrollbar-h-[6px] scrollbar-w-[6px] scrollbar-thumb-rounded-full scrollbar-thumb-slate-300 scrollbar-track-slate-50;
+}
+
+.ag-theme-quartz {
+  --ag-borders: none;
+  --ag-wrapper-border-radius: none;
+}

@@ -11,6 +11,7 @@ export type Permissions = {
   events?: PermissionsEnum;
   informationsBoard?: PermissionsEnum;
   publishers?: PermissionsEnum;
+  publishersRecords?: PermissionsEnum;
 };
 
 export type AllPermissions = keyof Omit<Permissions, 'admin'>;

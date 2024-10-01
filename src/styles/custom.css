@@ -1,3 +1,11 @@
+.icon-xxx-small.material-symbols-rounded {
+  @apply text-sm leading-[.5rem];
+}
+
+.icon-xx-small.material-symbols-rounded {
+  @apply text-base leading-3;
+}
+
 .icon-x-small.material-symbols-rounded {
   @apply text-lg leading-5;
 }
@@ -28,4 +36,10 @@
 
 .icon-xxxx-large.material-symbols-rounded {
   @apply text-7xl leading-[4rem];
+}
+
+.card-full-height {
+  height: calc(
+    100vh - theme('spacing.14') - theme('spacing.6') - theme('spacing.6')
+  );
 }
