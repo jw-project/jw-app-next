@@ -23,6 +23,6 @@ export async function deleteInformationsBoard(
   } catch (error) {
     return new BadRequestError((error as Error).message).toServerAction();
   } finally {
-    revalidatePath('/(app)/congregation/informations-board');
+    revalidatePath('/(app)/congregation/informations-board', 'layout');
   }
 }

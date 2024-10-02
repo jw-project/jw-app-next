@@ -39,9 +39,7 @@ export function InformationsBoardTable() {
     {
       id: 'title',
       header: () =>
-        translate(
-          'routes.congregation.informationsBoard.table.informationBoard',
-        ),
+        translate('routes.congregation.informations-board.table.information'),
       cell: ({ row }) => {
         const { title, type } = row.original;
 
@@ -58,7 +56,7 @@ export function InformationsBoardTable() {
     {
       id: 'date',
       header: () =>
-        translate('routes.congregation.informationsBoard.table.date'),
+        translate('routes.congregation.informations-board.table.date'),
       cell: ({ row }) => {
         const { startDate, endDate } = row.original;
 
@@ -69,7 +67,7 @@ export function InformationsBoardTable() {
       id: 'edit',
       header: () => (
         <AlignRight>
-          {translate('routes.congregation.informationsBoard.table.actions')}
+          {translate('routes.congregation.informations-board.table.actions')}
         </AlignRight>
       ),
       cell: ({
@@ -83,6 +81,7 @@ export function InformationsBoardTable() {
           </Link>
         </AlignRight>
       ),
+      size: 100,
     },
   ];
 
@@ -127,7 +126,7 @@ export function InformationsBoardTable() {
         ref={deleteModalRef}
         severity="question-warning"
         text={String(
-          translate('routes.congregation.informationsBoard.delete-modal', {
+          translate('routes.congregation.informations-board.delete-modal', {
             length: Number(tableRef.current?.getSelectedRowModel().rows.length),
           }),
         )}

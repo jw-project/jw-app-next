@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 
-import { Form } from '~/components/commons/form/form';
-import type { EntityForm } from '~/components/commons/table/types';
-import { useUser } from '~/hooks/use-user';
-import { useTranslation } from '~/hooks/use-translation';
-import { useValidatePermissions } from '~/hooks/use-validate-permissions';
-
 import { saveEvent } from '~/actions/congregation/events/save';
 import { eventFormSchema } from '~/actions/congregation/events/validations';
+import { Form } from '~/components/commons/form/form';
+import type { EntityForm } from '~/components/commons/table/types';
 import { eventOptions, type EventEntity } from '~/entities/event';
+import { useTranslation } from '~/hooks/use-translation';
+import { useUser } from '~/hooks/use-user';
+import { useValidatePermissions } from '~/hooks/use-validate-permissions';
 
 export const EventForm = ({ id, data, disabled }: EntityForm<EventEntity>) => {
   const { permissions } = useUser();
