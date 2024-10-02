@@ -39,6 +39,7 @@ export async function saveCongregation(
         congregation: PermissionsEnum.EDIT,
         events: PermissionsEnum.EDIT,
         groups: PermissionsEnum.EDIT,
+        informationsBoard: PermissionsEnum.EDIT,
         publishers: PermissionsEnum.EDIT,
       };
 

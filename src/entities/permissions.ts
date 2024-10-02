@@ -9,6 +9,7 @@ export type Permissions = {
   congregation: PermissionsEnum;
   groups?: PermissionsEnum;
   events?: PermissionsEnum;
+  informationsBoard?: PermissionsEnum;
   publishers?: PermissionsEnum;
   publishersRecords?: PermissionsEnum;
 };
